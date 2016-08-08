@@ -42,6 +42,8 @@
             // 
             // DataGridView1
             // 
+            this.DataGridView1.AllowUserToAddRows = false;
+            this.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridView1.Location = new System.Drawing.Point(92, 87);
             this.DataGridView1.Name = "DataGridView1";

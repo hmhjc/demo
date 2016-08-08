@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -137,21 +138,21 @@ namespace demo
         /// <param name="e"></param>
         private void btn_Save_Click(object sender, EventArgs e)
         {
-            DataTable dt;
+            //获取表的主键
+            ArrayList primaryKey = new ArrayList();
+            primaryKey = GetPrimaryKey(tableName, conn);
             
-            
-               
             StringBuilder text = new StringBuilder("insert into " + tableName + " (");
             text.Append(dataGridView1.Columns[1].HeaderCell.Value.ToString());
             for (int i = 2; i < dataGridView1.Columns.Count; i++)
             {
-                text.Append( ","+dataGridView1.Columns[i].HeaderCell.Value.ToString() );
+                text.Append("," + dataGridView1.Columns[i].HeaderCell.Value.ToString());
             }
             text.Append(") values (");
             text.Append("'" + dataGridView1.Rows[0].Cells[1].Value.ToString() + "'");
             for (int i = 2; i < dataGridView1.Columns.Count; i++)
             {
-                text.Append(",'"+dataGridView1.Rows[0].Cells[i].Value.ToString() + "'");
+                text.Append(",'" + dataGridView1.Rows[0].Cells[i].Value.ToString() + "'");
             }
             text.Append(")");
             SqlCommand cmd = new SqlCommand();
@@ -166,20 +167,36 @@ namespace demo
             {
                 MessageBox.Show("失败");
                 throw new Exception(ex.Message);
-            }  
+            }
             MessageBox.Show("成功");
             this.Dispose();
         }
+        #region GetPrimaryKey(string tableName, SqlConnection conn) :: GetPrimaryKey;获取主键
+        /// <summary>
+        /// GetPrimaryKey;获取主键
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="conn"></param>
+        /// <returns></returns>
+        private ArrayList GetPrimaryKey(string tableName, SqlConnection conn)
+        {
+            ArrayList list = new ArrayList();
+            DataTable dt = new DataTable();
+            SqlDataAdapter dataadapter = new SqlDataAdapter();
+            SqlCommand cmdd = new SqlCommand("select * from " + tableName, conn);
+            dataadapter.SelectCommand = cmdd;
+            dataadapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+            dataadapter.Fill(dt);
+            DataColumn[] cols;
+            cols = dt.PrimaryKey;
+            for (int i = 0; i < cols.Length; i++)
+            {
+                list.Add(cols[i].ColumnName);
+            }
+            return list;
+        }
+
+        #endregion       
         #endregion
-
-        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
-        {
-
-        }
     }
 }

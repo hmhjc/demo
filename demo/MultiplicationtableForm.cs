@@ -27,6 +27,8 @@ namespace demo
         /// <param name="e"></param>
         private void MultiplicationtableForm_Load(object sender, EventArgs e)
         {
+            //设置内容居中
+            DataGridView1.RowsDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             for (int i = 0; i < 10; i++)
             {
                 cmb_ChooseNumber.Items.Add(i);
@@ -95,10 +97,9 @@ namespace demo
 
         #region ★　Event
        
-        #region btn_Ok_Click(object sender, EventArgs e) ::btn_Ok_Click;单机事件
+        #region btn_Ok_Click(object sender, EventArgs e) ::btn_Ok_Click;单事件
         private void btn_Ok_Click(object sender, EventArgs e)
         {
-            cmb_ChooseNumber.Text = null;
             //clear;清空控件中的内容,DataGridView要用Rows.Clear();方法
             ListView1.Clear();
             textBox1.Clear();
