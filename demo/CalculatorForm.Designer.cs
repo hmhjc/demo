@@ -112,9 +112,8 @@
             this.label_formula.AutoSize = true;
             this.label_formula.Location = new System.Drawing.Point(13, 60);
             this.label_formula.Name = "label_formula";
-            this.label_formula.Size = new System.Drawing.Size(41, 12);
+            this.label_formula.Size = new System.Drawing.Size(0, 12);
             this.label_formula.TabIndex = 39;
-            this.label_formula.Text = "label1";
             // 
             // textBox_insertNumber
             // 

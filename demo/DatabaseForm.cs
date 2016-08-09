@@ -30,6 +30,24 @@ namespace demo
 
         #region ★　Event
 
+        #region btn_StringConnect_Click(object sender, EventArgs e) :: DB Connect String;输入连接字符串连接
+        /// <summary>
+        /// DB Connect String ;输入连接字符串连接
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_StringConnect_Click(object sender, EventArgs e)
+        {
+            string dbConnectString;
+            dbConnectString = txt_DB_Connect_String.Text.ToString();
+            //server=.;database=databasename;uid=sa;pwd=micube2016
+            char[] separator = { ';', '=' };
+            string[] splitstrings = new string[100];
+            splitstrings = dbConnectString.Split(separator);
+            ConnectDatebase(splitstrings[3]);
+        }
+        #endregion
+
         #region btn_Connect_Click(object sender, EventArgs e) :: btn_Connect_Click(object sender, EventArgs e);连接数据库按钮操作
         /// <summary>
         /// btn_Connect_Click(object sender, EventArgs e);连接数据库按钮操作
@@ -276,6 +294,6 @@ namespace demo
         #endregion
 
         #endregion
-
+     
     }
 }

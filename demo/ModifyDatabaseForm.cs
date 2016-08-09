@@ -95,9 +95,10 @@ namespace demo
             {
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("存在关联的表,无法删除");
+                MessageBox.Show(ex.Message);
+                return;
             }
             MessageBox.Show("删除成功");
             this.Dispose();
@@ -112,10 +113,9 @@ namespace demo
         /// <param name="e"></param>
         private void btn_New_Click(object sender, EventArgs e)
         {
-
             btn_Delete.Enabled = false;
             //最后一行默认空行
-            int k = this.dataGridView1.Rows.Count - 1;
+            int k = this.dataGridView1.Rows.Count -1;
             if (dataGridView1.Rows.Count > 0)
             {
                 //从下往上删，避免沙漏效应
@@ -129,10 +129,10 @@ namespace demo
 
         #endregion
 
-        #region MyRegion
+        #region btn_Save_Click(object sender, EventArgs e) :: save;保存修改
         /// <summary>
         /// btn_Save_Click(object sender, EventArgs e)
-        /// 当主键重复时
+        /// 当主键重复时update,不重复时insert
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -141,7 +141,6 @@ namespace demo
             //获取表的主键
             ArrayList primaryKey = new ArrayList();
             primaryKey = GetPrimaryKey(tableName, conn);
-            
             StringBuilder text = new StringBuilder("insert into " + tableName + " (");
             text.Append(dataGridView1.Columns[1].HeaderCell.Value.ToString());
             for (int i = 2; i < dataGridView1.Columns.Count; i++)
@@ -165,8 +164,8 @@ namespace demo
             }
             catch (Exception ex)
             {
-                MessageBox.Show("失败");
-                throw new Exception(ex.Message);
+                MessageBox.Show(ex.Message);
+                return;
             }
             MessageBox.Show("成功");
             this.Dispose();
