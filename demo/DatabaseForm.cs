@@ -110,7 +110,9 @@ namespace demo
         private void dataGridView1_DoubleClick(object sender, EventArgs e)
         {
             ModifyDatabaseForm mdf = new ModifyDatabaseForm(tableName, keyName, keystr, conn);
-            mdf.Show();
+            mdf.ShowDialog();
+
+            btn_Select_Click(null, null);
         }
         #endregion
 
@@ -197,6 +199,7 @@ namespace demo
                 datebaseNameList.Add(sdr[0].ToString());
                 cmb_DatabaseName.Items.Add(sdr[0].ToString());
             }
+            sdr.Close();
             sconn.Close();
         }
         #endregion
@@ -278,12 +281,13 @@ namespace demo
             if (flag)
             {
                 //创建SqlDataAdapter对象,conn用上面实例化好的
-                SqlDataAdapter sda = new SqlDataAdapter("select * from " + tableName, conn);
+                SqlDataAdapter sda = new SqlDataAdapter("select * from [" + tableName+"]", conn);
                 //创建一个DataSet对象
                 DataSet ds = new DataSet();
                 //使用SqlDataAdapter对象的Fill方法填充DataSet
                 sda.Fill(ds);
                 dataGridView1.DataSource = ds.Tables[0];
+                
             }
             else
             {
@@ -294,6 +298,6 @@ namespace demo
         #endregion
 
         #endregion
-     
+
     }
 }
