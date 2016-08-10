@@ -148,7 +148,6 @@
             this.Controls.Add(this.btn_New);
             this.Name = "ModifyDatabaseForm";
             this.Text = "ModifyDatabaseForm";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ModifyDatabaseForm_FormClosed);
             this.Load += new System.EventHandler(this.ModifyDatabaseForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);

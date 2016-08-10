@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -17,6 +18,10 @@ namespace demo
         string keyName;
         //存储主键
         string keystr;
+        //表主键名字的集合
+        List<string> primaryKeyName = new List<string>();
+        //表主键值的集合
+        List<string> primaryKeyData = new List<string>();
         SqlConnection conn;
         //存储数据库名
         ArrayList datebaseNameList;
@@ -73,6 +78,8 @@ namespace demo
         {
             //取得下拉框中的数据库名
             tableName = txt_TableName.Text.ToString();
+            //取得数据库的主键名的集合
+            primaryKeyName = GetPrimaryKey(tableName);
             ShowDatebase(tableName);
         }
         #endregion
@@ -109,9 +116,9 @@ namespace demo
         /// <param name="e"></param>
         private void dataGridView1_DoubleClick(object sender, EventArgs e)
         {
-            ModifyDatabaseForm mdf = new ModifyDatabaseForm(tableName, keyName, keystr, conn);
+           
+            ModifyDatabaseForm mdf = new ModifyDatabaseForm(tableName, primaryKeyName, primaryKeyData, conn);
             mdf.ShowDialog();
-
             btn_Select_Click(null, null);
         }
         #endregion
@@ -134,22 +141,42 @@ namespace demo
         /// <param name="e"></param>
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            string[] str = new string[dataGridView1.Columns.Count];
-            //获取主键的名字
-            keyName = dataGridView1.Columns[0].HeaderCell.Value.ToString();
-
+            //取得数据库的主键名的集合
+            primaryKeyName = GetPrimaryKey(tableName);
             //遍历表格,定位到选中的那行
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            primaryKeyData.Clear();
+            foreach (string item in primaryKeyName)
             {
-                if (dataGridView1.Rows[i].Selected == true)
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
-                    for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                    if (dataGridView1.Rows[i].Selected == true)
                     {
-                        str[j] = dataGridView1.Rows[i].Cells[j].Value.ToString();
+                        for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                        {
+                            if (dataGridView1.Columns[j].HeaderCell.Value.ToString().Equals(item))
+                            {
+                            primaryKeyData.Add(dataGridView1.Rows[i].Cells[j].Value.ToString());
+                            }
+                        }
                     }
                 }
             }
-            keystr = str[0];
+            //string[] str = new string[dataGridView1.Columns.Count];
+            ////获取主键的名字
+            //keyName = dataGridView1.Columns[0].HeaderCell.Value.ToString();
+
+            ////遍历表格,定位到选中的那行
+            //for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            //{
+            //    if (dataGridView1.Rows[i].Selected == true)
+            //    {
+            //        for (int j = 0; j < dataGridView1.Columns.Count; j++)
+            //        {
+            //            str[j] = dataGridView1.Rows[i].Cells[j].Value.ToString();
+            //        }
+            //    }
+            //}
+            //keystr = str[0];
         }
         #endregion
 
@@ -287,7 +314,6 @@ namespace demo
                 //使用SqlDataAdapter对象的Fill方法填充DataSet
                 sda.Fill(ds);
                 dataGridView1.DataSource = ds.Tables[0];
-                
             }
             else
             {
@@ -297,6 +323,34 @@ namespace demo
 
         #endregion
 
+        #region GetPrimaryKey(string tableName, SqlConnection conn) :: GetPrimaryKey;获取主键
+        /// <summary>
+        /// GetPrimaryKey;获取主键
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="conn"></param>
+        /// <returns></returns>
+        private List<string> GetPrimaryKey(string tableName)
+        {
+            List<string> list = new List<string>();
+            DataTable dt = new DataTable();
+            SqlDataAdapter dataadapter = new SqlDataAdapter();
+            SqlCommand cmdd = new SqlCommand("select * from [" + tableName + "]", conn);
+            dataadapter.SelectCommand = cmdd;
+            dataadapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+            dataadapter.Fill(dt);
+            DataColumn[] cols;
+            cols = dt.PrimaryKey;
+            for (int i = 0; i < cols.Length; i++)
+            {
+                list.Add(cols[i].ColumnName);
+            }
+            dataadapter.Dispose();
+
+            return list;
+        }
+
+        #endregion
         #endregion
 
     }
