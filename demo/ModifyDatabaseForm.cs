@@ -24,6 +24,8 @@ namespace demo
         List<string> primaryKeyName = new List<string>();
         //表主键值的集合
         List<string> primaryKeyData = new List<string>();
+        //合法的插入key值
+        string key = null;
         #endregion
         public ModifyDatabaseForm(string tableName, List<string> primaryKeyName, List<string> primaryKeyData, SqlConnection conn)
         {
@@ -89,7 +91,6 @@ namespace demo
         /// <returns></returns>
         private Boolean JudgeKeyExist(List<string> modifykey, List<string> primaryKeyName)
         {
-
             SqlCommand cmd1 = new SqlCommand();
             cmd1.Connection = conn;
             StringBuilder text1 = new StringBuilder("select count(*) from " + tableName + " where ");
@@ -319,8 +320,6 @@ namespace demo
             {
                 //主键没有重复时插入操作,提示用户
                 MessageBoxButtons messButton = MessageBoxButtons.OKCancel;
-                //"确定要退出吗？"是对话框的显示信息，"退出系统"是对话框的标题
-                //默认情况下，如MessageBox.Show("确定要退出吗？")只显示一个“确定”按钮。
                 DialogResult dr = MessageBox.Show("主键不存在,插入数据!", "提示", messButton);
                 if (dr == DialogResult.OK)//如果点击“确定”按钮
                 {
@@ -342,7 +341,27 @@ namespace demo
 
                     if (isauto)
                     {
-                        InsertKeyAutoIncrement();
+                        key = null;
+                        Boolean isLegal = JudgeKeyLegal(modifykey);
+                        //主键没有重复时插入操作,提示用户
+                        if (isLegal)
+                        {
+                            MessageBoxButtons messButton1 = MessageBoxButtons.OKCancel;
+                            DialogResult dr1 = MessageBox.Show("自增主键合法,插入数据!", "提示", messButton);
+                            if (dr1 == DialogResult.OK)//如果点击“确定”按钮
+                            {
+                                InsertKeyAutoIncrement();
+                            }
+                            else
+                            {
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("自增主键的值应该为"+key+"请重新输入合法的主键");
+                        }
+                       
                     }
                     else
                     {
@@ -367,9 +386,30 @@ namespace demo
                 }
             }
         }
+
+
         #endregion
 
         #endregion
+
+        private bool JudgeKeyLegal(List<string> modifykey)
+        {
+            SqlCommand cmd1 = new SqlCommand();
+            cmd1.Connection = conn;
+            StringBuilder text1 = new StringBuilder("select ident_current('" + tableName + "')+1");
+            cmd1.CommandText = text1.ToString();
+            cmd1.CommandType = CommandType.Text;
+            key=cmd1.ExecuteScalar().ToString();
+            if (key.Equals(modifykey[0]))
+            {
+                //说明主键是合法的
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         private void UpdataData()
         {
@@ -424,78 +464,5 @@ namespace demo
             this.Dispose();
 
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //主键自增时的插入操作
-            StringBuilder text = new StringBuilder("insert into " + tableName + " (");
-            text.Append(dataGridView1.Columns[1].HeaderCell.Value.ToString());
-            for (int i = 2; i < dataGridView1.Columns.Count; i++)
-            {
-                text.Append("," + dataGridView1.Columns[i].HeaderCell.Value.ToString());
-            }
-            text.Append(") values (");
-            text.Append("'" + dataGridView1.Rows[0].Cells[1].Value.ToString() + "'");
-            for (int i = 2; i < dataGridView1.Columns.Count; i++)
-            {
-                text.Append(",'" + dataGridView1.Rows[0].Cells[i].Value.ToString() + "'");
-            }
-            text.Append(")");
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = conn;
-            cmd.CommandText = text.ToString();
-            cmd.CommandType = CommandType.Text;
-            try
-            {
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
-            MessageBox.Show("成功");
-            this.Dispose();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //主键不自增时的插入操作
-            StringBuilder text = new StringBuilder("insert into " + tableName + " (");
-            text.Append(dataGridView1.Columns[0].HeaderCell.Value.ToString());
-            for (int i = 1; i < dataGridView1.Columns.Count; i++)
-            {
-                text.Append("," + dataGridView1.Columns[i].HeaderCell.Value.ToString());
-            }
-            text.Append(") values (");
-            text.Append("'" + dataGridView1.Rows[0].Cells[0].Value.ToString() + "'");
-            for (int i = 1; i < dataGridView1.Columns.Count; i++)
-            {
-                text.Append(",'" + dataGridView1.Rows[0].Cells[i].Value.ToString() + "'");
-            }
-            text.Append(")");
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = conn;
-            cmd.CommandText = text.ToString();
-            cmd.CommandType = CommandType.Text;
-            try
-            {
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
-            MessageBox.Show("成功");
-            this.Dispose();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //更新操作
-
-        }
-
     }
 }
