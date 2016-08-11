@@ -15,6 +15,16 @@ namespace demo
     public partial class ModifyDatabaseForm : Form
     {
 
+        public ModifyDatabaseForm(string tableName, List<string> primaryKeyName, List<string> primaryKeyData, SqlConnection conn)
+        {
+            InitializeComponent();
+            this.tableName = tableName;
+            this.primaryKeyName = primaryKeyName;
+            this.primaryKeyData = primaryKeyData;
+            this.conn = conn;
+            this.ttt = false;
+        }
+      
         #region ★　Var
         string tableName;
         public bool ttt = false;
@@ -27,15 +37,6 @@ namespace demo
         //合法的插入key值
         string key = null;
         #endregion
-        public ModifyDatabaseForm(string tableName, List<string> primaryKeyName, List<string> primaryKeyData, SqlConnection conn)
-        {
-            InitializeComponent();
-            this.tableName = tableName;
-            this.primaryKeyName = primaryKeyName;
-            this.primaryKeyData = primaryKeyData;
-            this.conn = conn;
-            this.ttt = false;
-        }
 
         #region ★　Function
 
@@ -212,7 +213,92 @@ namespace demo
             this.Dispose();
         }
         #endregion
+      
+        #region JudgeKeyLegal(List<string> modifykey) :: JudgeKeyLegal(List<string> modifykey);通过传入的主键单元格中的值判断主键合不合法
+        /// <summary>
+        /// JudgeKeyLegal(List<string> modifykey);通过传入的主键单元格中的值判断主键合不合法
+        /// </summary>
+        /// <param name="modifykey"></param>
+        /// <returns></returns>
+        private bool JudgeKeyLegal(List<string> modifykey)
+        {
+            SqlCommand cmd1 = new SqlCommand();
+            cmd1.Connection = conn;
+            StringBuilder text1 = new StringBuilder("select ident_current('" + tableName + "')+1");
+            cmd1.CommandText = text1.ToString();
+            cmd1.CommandType = CommandType.Text;
+            key = cmd1.ExecuteScalar().ToString();
+            if (key.Equals(modifykey[0]))
+            {
+                //说明主键是合法的
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        } 
+        #endregion
 
+        #region UpdataData() :: UpdataData();更新操作
+        /// <summary>
+        /// UpdataData();更新操作
+        /// </summary>
+        private void UpdataData()
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = conn;
+            StringBuilder UpdateText = new StringBuilder("update " + tableName + " set ");
+            if (dataGridView1.Columns.Count > 1)
+            {
+                for (int j = 0; j < dataGridView1.Columns.Count - 1; j++)
+                {
+                    foreach (string item in primaryKeyName)
+                    {
+                        if (dataGridView1.Columns[j].HeaderCell.Value.ToString().Equals(item))
+                        {
+                        }
+                        else
+                        {
+                            UpdateText.Append(dataGridView1.Columns[j].HeaderCell.Value.ToString() + " = '");
+                            UpdateText.Append(dataGridView1.Rows[0].Cells[j].Value.ToString() + "',");
+                        }
+                    }
+                }
+            }
+            UpdateText.Append(dataGridView1.Columns[dataGridView1.Columns.Count - 1].HeaderCell.Value.ToString() + " = '");
+            UpdateText.Append(dataGridView1.Rows[0].Cells[dataGridView1.Columns.Count - 1].Value.ToString() + "'");
+
+            UpdateText.Append(" where ");
+            if (primaryKeyName.Count > 1)
+            {
+                for (int i = 0; i < primaryKeyName.Count - 1; i++)
+                {
+                    UpdateText.Append(primaryKeyName[i] + "='" + primaryKeyData[i] + "'and");
+                }
+                UpdateText.Append(primaryKeyName[primaryKeyName.Count - 1] + "='" + primaryKeyData[primaryKeyData.Count - 1] + "'");
+            }
+            else
+            {
+                UpdateText.Append(primaryKeyName[0] + "='" + primaryKeyData[0] + "'");
+            }
+            cmd.CommandText = UpdateText.ToString();
+            cmd.CommandType = CommandType.Text;
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+            MessageBox.Show("更新成功");
+            this.Dispose();
+
+        }  
+        #endregion
+      
         #endregion
 
         #region ★　Event
@@ -392,77 +478,5 @@ namespace demo
 
         #endregion
 
-        private bool JudgeKeyLegal(List<string> modifykey)
-        {
-            SqlCommand cmd1 = new SqlCommand();
-            cmd1.Connection = conn;
-            StringBuilder text1 = new StringBuilder("select ident_current('" + tableName + "')+1");
-            cmd1.CommandText = text1.ToString();
-            cmd1.CommandType = CommandType.Text;
-            key=cmd1.ExecuteScalar().ToString();
-            if (key.Equals(modifykey[0]))
-            {
-                //说明主键是合法的
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private void UpdataData()
-        {
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = conn;
-            StringBuilder UpdateText = new StringBuilder("update " + tableName + " set ");
-            if (dataGridView1.Columns.Count>1)
-            {
-                for (int j = 0; j < dataGridView1.Columns.Count - 1; j++)
-                {
-                    foreach (string item in primaryKeyName)
-                    {
-                        if (dataGridView1.Columns[j].HeaderCell.Value.ToString().Equals(item))
-                        {
-                        }
-                        else
-                        {
-                            UpdateText.Append(dataGridView1.Columns[j].HeaderCell.Value.ToString() + " = '");
-                            UpdateText.Append(dataGridView1.Rows[0].Cells[j].Value.ToString() + "',");
-                        }
-                    }
-                }
-            }
-            UpdateText.Append(dataGridView1.Columns[dataGridView1.Columns.Count - 1].HeaderCell.Value.ToString() + " = '");
-            UpdateText.Append(dataGridView1.Rows[0].Cells[dataGridView1.Columns.Count - 1].Value.ToString() + "'");
-
-            UpdateText.Append(" where ");
-            if (primaryKeyName.Count > 1)
-            {
-                for (int i = 0; i < primaryKeyName.Count - 1; i++)
-                {
-                    UpdateText.Append(primaryKeyName[i] + "='" + primaryKeyData[i] + "'and");
-                }
-                UpdateText.Append(primaryKeyName[primaryKeyName.Count - 1] + "='" + primaryKeyData[primaryKeyData.Count - 1] + "'");
-            }
-            else
-            {
-                UpdateText.Append(primaryKeyName[0] + "='" + primaryKeyData[0] + "'");
-            }
-            cmd.CommandText = UpdateText.ToString();
-            cmd.CommandType = CommandType.Text;
-            try
-            {
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
-            MessageBox.Show("更新成功");
-            this.Dispose();
-
-        }
     }
 }

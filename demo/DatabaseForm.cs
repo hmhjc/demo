@@ -9,6 +9,11 @@ namespace demo
 {
     public partial class DatabaseForm : Form
     {
+        public DatabaseForm()
+        {
+            InitializeComponent();
+        }
+       
         #region ★　Var
         //存储数据库名
         string datebaseName = null;
@@ -28,10 +33,6 @@ namespace demo
         //存储表名
         ArrayList tableNameList;
         #endregion
-        public DatabaseForm()
-        {
-            InitializeComponent();
-        }
 
         #region ★　Event
 
