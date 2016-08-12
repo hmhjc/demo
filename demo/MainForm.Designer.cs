@@ -31,6 +31,7 @@
             this.btn_Multiplicationtable = new System.Windows.Forms.Button();
             this.btn_Calculator = new System.Windows.Forms.Button();
             this.btn_Database = new System.Windows.Forms.Button();
+            this.btn_Notepad = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_Multiplicationtable
@@ -63,11 +64,22 @@
             this.btn_Database.UseVisualStyleBackColor = true;
             this.btn_Database.Click += new System.EventHandler(this.btn_Database_Click);
             // 
+            // btn_Notepad
+            // 
+            this.btn_Notepad.Location = new System.Drawing.Point(52, 179);
+            this.btn_Notepad.Name = "btn_Notepad";
+            this.btn_Notepad.Size = new System.Drawing.Size(75, 23);
+            this.btn_Notepad.TabIndex = 3;
+            this.btn_Notepad.Text = "Notepad";
+            this.btn_Notepad.UseVisualStyleBackColor = true;
+            this.btn_Notepad.Click += new System.EventHandler(this.btn_Notepad_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(335, 348);
+            this.Controls.Add(this.btn_Notepad);
             this.Controls.Add(this.btn_Database);
             this.Controls.Add(this.btn_Calculator);
             this.Controls.Add(this.btn_Multiplicationtable);
@@ -82,6 +94,7 @@
         private System.Windows.Forms.Button btn_Multiplicationtable;
         private System.Windows.Forms.Button btn_Calculator;
         private System.Windows.Forms.Button btn_Database;
+        private System.Windows.Forms.Button btn_Notepad;
     }
 }
 

@@ -185,6 +185,7 @@ namespace demo
 
         private void button_equal_Click(object sender, EventArgs e)
         {
+
             string insertNumber = textBox_insertNumber.Text.ToString();
             temp1 = Convert.ToDouble(insertNumber);//取得输入框中的数字
             label_formula.Text = "";   //修改公式位置的值
@@ -314,6 +315,121 @@ namespace demo
         private void button_9_Click(object sender, EventArgs e)
         {
             AddNum("9");
+        }
+
+        private void CalculatorForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Shift && e.KeyValue==56)
+            {
+                //乘法
+                button_mul_Click(null,null);
+            }
+            else if (e.Modifiers == Keys.Shift && e.KeyValue == 187)
+            {
+                button_add_Click(null,null);
+            }
+            else 
+            {
+                switch (e.KeyValue)
+                {
+                    case 48:
+                        button_0_Click(null, null);
+                        break;
+                    case 96:
+                        button_0_Click(null, null);
+                        break;
+                    case 49:
+                        button_1_Click(null, null);
+                        break;
+                    case 97:
+                        button_1_Click(null, null);
+                        break;
+                    case 50:
+                        button_2_Click(null, null);
+                        break;
+                    case 98:
+                        button_2_Click(null, null);
+                        break;
+                    case 51:
+                        button_3_Click(null, null);
+                        break;
+                    case 99:
+                        button_3_Click(null, null);
+                        break;
+                    case 52:
+                        button_4_Click(null, null);
+                        break;
+                    case 100:
+                        button_4_Click(null, null);
+                        break;
+                    case 53:
+                        button_5_Click(null, null);
+                        break;
+                    case 101:
+                        button_5_Click(null, null);
+                        break;
+                    case 54:
+                        button_6_Click(null, null);
+                        break;
+                    case 102:
+                        button_6_Click(null, null);
+                        break;
+                    case 55:
+                        button_7_Click(null, null);
+                        break;
+                    case 103:
+                        button_7_Click(null, null);
+                        break;
+                    case 56:
+                        button_8_Click(null, null);
+                        break;
+                    case 104:
+                        button_8_Click(null, null);
+                        break;
+                    case 57:
+                        button_9_Click(null, null);
+                        break;
+                    case 105:
+                        button_9_Click(null, null);
+                        break;
+                    case 189:
+                        button_sub_Click(null, null);
+                        break;
+                    case 109:
+                        button_sub_Click(null, null);
+                        break;
+                    case 190:
+                        button_dian_Click(null, null);
+                        break;
+                    case 110:
+                        button_dian_Click(null, null);
+                        break;
+                    case 191:
+                        button_div_Click(null, null);
+                        break;
+                    case 111:
+                        button_div_Click(null, null);
+                        break;
+                    case 8:
+                        button_delete_Click(null, null);
+                        break;
+                    case 187:
+                        button_equal_Click(null, null);
+                        break;
+                    case 13:
+                        button_equal_Click(null, null);
+                        break;
+                    case 106:
+                        button_mul_Click(null, null);
+                        break;
+                    case 107:
+                        button_add_Click(null, null);
+                        break;
+                    default:
+                        break;
+                }
+            }
+          
         }
     }
 }

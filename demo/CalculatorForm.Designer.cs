@@ -118,7 +118,9 @@
             // textBox_insertNumber
             // 
             this.textBox_insertNumber.Location = new System.Drawing.Point(15, 85);
+            this.textBox_insertNumber.MaxLength = 11;
             this.textBox_insertNumber.Name = "textBox_insertNumber";
+            this.textBox_insertNumber.ReadOnly = true;
             this.textBox_insertNumber.Size = new System.Drawing.Size(158, 21);
             this.textBox_insertNumber.TabIndex = 38;
             // 
@@ -306,7 +308,7 @@
             this.button_zf.Name = "button_zf";
             this.button_zf.Size = new System.Drawing.Size(35, 35);
             this.button_zf.TabIndex = 21;
-            this.button_zf.Text = ".";
+            this.button_zf.Text = "±";
             this.button_zf.UseVisualStyleBackColor = true;
             this.button_zf.Click += new System.EventHandler(this.button_zf_Click);
             // 
@@ -327,8 +329,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(189, 327);
             this.Controls.Add(this.panel1);
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
             this.Name = "CalculatorForm";
             this.Text = "CalculatorForm";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CalculatorForm_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

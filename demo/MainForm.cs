@@ -34,5 +34,11 @@ namespace demo
             DatabaseForm df = new DatabaseForm();
             df.Show();
         }
+
+        private void btn_Notepad_Click(object sender, EventArgs e)
+        {
+            NotepadForm nf = new NotepadForm();
+            nf.Show();
+        }
     }
 }
