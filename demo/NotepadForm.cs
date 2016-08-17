@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace demo
 {
     public partial class NotepadForm : Form
     {
+        bool ischanged = false;
         public NotepadForm()
         {
             InitializeComponent();
@@ -21,15 +19,49 @@ namespace demo
         #region tsmi_new_Click(object sender, EventArgs e) :: new file;新建文件
         /// <summary>
         /// new file;新建文件
+        /// 是否需要保存对话框
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tsmi_new_Click(object sender, EventArgs e)
         {
-
+            if (ischanged)
+            {
+                //如果已经修改过之后,保存
+                string s = this.Text.ToString();
+                string[] s1 = s.Split('-');
+                s = s1[0];
+                DialogResult dr;
+                dr = MessageBox.Show("是否将内容保存到 " + s, "记事本", MessageBoxButtons.YesNoCancel,
+               MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+                if (dr == DialogResult.Yes)
+                {
+                    //保存
+                    tsmi_save_Click(null, null);
+                }
+                else if (dr == DialogResult.No)
+                {
+                    //不保存就清空内容
+                    rtb.Text = "";
+                    this.Text = "无标题 - 记事本";
+                }
+                else if (dr == DialogResult.Cancel)
+                {
+                    return;
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                rtb.Text = "";
+                this.Text = "无标题 - 记事本";
+            }
         }
         #endregion
-        
+
         #region tsmi_open_Click(object sender, EventArgs e) :: open file;打开文件
         /// <summary>
         /// open file;打开文件
@@ -38,10 +70,19 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_open_Click(object sender, EventArgs e)
         {
-
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string fName = openFileDialog1.FileName;
+                FileInfo finfo = new FileInfo(fName);
+                this.Text = finfo.Name;
+                this.Text += "-记事本";
+                StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.UTF8);
+                rtb.Text = sr.ReadToEnd();
+                sr.Close();
+            }
         }
         #endregion
-        
+
         #region tsmi_save_Click(object sender, EventArgs e) :: save file;保存文件
         /// <summary>
         /// save file;保存文件
@@ -50,10 +91,26 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_save_Click(object sender, EventArgs e)
         {
-
+            if (this.Text.Equals("无标题 - 记事本"))
+            {
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    //读取的时候设置字符编码为Default
+                    StreamWriter c = new StreamWriter(saveFileDialog1.FileName);
+                    c.Write(rtb.Text);
+                    c.Close();
+                    this.Text = saveFileDialog1.FileName.ToString().Substring(saveFileDialog1.FileName.ToString().LastIndexOf("\\") + 1);
+                }
+            }
+            else
+            {
+                StreamWriter c = new StreamWriter(this.Text);
+                c.Write(rtb.Text);
+                c.Close();
+            }
         }
         #endregion
-        
+
         #region tsmi_saveas_Click(object sender, EventArgs e) :: save as;另存为
         /// <summary>
         /// save as;另存为
@@ -62,10 +119,17 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_saveas_Click(object sender, EventArgs e)
         {
-
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                //读取的时候设置字符编码为Default
+                StreamWriter c = new StreamWriter(saveFileDialog1.FileName);
+                c.Write(rtb.Text);
+                c.Close();
+                this.Text = saveFileDialog1.FileName.ToString().Substring(saveFileDialog1.FileName.ToString().LastIndexOf("\\") + 1);
+            }
         }
         #endregion
-        
+
         #region tsmi_pageset_Click(object sender, EventArgs e) :: paper setting;页面设置
         /// <summary>
         /// paper setting;页面设置
@@ -77,7 +141,7 @@ namespace demo
 
         }
         #endregion
-        
+
         #region tsmi_print_Click(object sender, EventArgs e) :: print;打印
         /// <summary>
         /// print;打印
@@ -89,7 +153,7 @@ namespace demo
 
         }
         #endregion
-        
+
         #region tsmi_exit_Click(object sender, EventArgs e) :: exit:推出
         /// <summary>
         /// exit:推出
@@ -101,7 +165,7 @@ namespace demo
 
         }
         #endregion
-        
+
         #region tsmi_revocation_Click(object sender, EventArgs e) :: revocation;撤销
         /// <summary>
         /// revocation;撤销
@@ -113,7 +177,7 @@ namespace demo
 
         }
         #endregion
-        
+
         #region tsmi_cut_Click(object sender, EventArgs e) :: cut;剪切
         /// <summary>
         /// cut;剪切
@@ -161,7 +225,7 @@ namespace demo
 
         }
         #endregion
-        
+
         #region tsmi_findnext_Click(object sender, EventArgs e) :: findnext;查找下一个
         /// <summary>
         /// findnext;查找下一个
@@ -173,7 +237,7 @@ namespace demo
 
         }
         #endregion
-        
+
         #region tsmi_replace_Click(object sender, EventArgs e) :: replace;替换
         /// <summary>
         /// replace;替换
@@ -185,7 +249,7 @@ namespace demo
 
         }
         #endregion
-        
+
         #region tsmi_toline_Click(object sender, EventArgs e) :: toline;转到
         /// <summary>
         /// toline;转到
@@ -197,7 +261,7 @@ namespace demo
 
         }
         #endregion
-        
+
         #region tsmi_allselect_Click(object sender, EventArgs e) :: allselect;全选
         /// <summary>
         /// allselect;全选
@@ -221,7 +285,7 @@ namespace demo
 
         }
         #endregion
-        
+
         #region tsmi_autochangeline_Click(object sender, EventArgs e) :: autochangeline;自动换行
         /// <summary>
         /// autochangeline;自动换行   
@@ -233,7 +297,7 @@ namespace demo
 
         }
         #endregion
-        
+
         #region tsmi_font_Click(object sender, EventArgs e) :: font setting;字体设置
         /// <summary>
         /// font setting;字体设置
@@ -245,7 +309,7 @@ namespace demo
 
         }
         #endregion
-       
+
         #region tsmi_about_Click(object sender, EventArgs e) :: about;关于
         /// <summary>
         /// about;关于
@@ -256,8 +320,13 @@ namespace demo
         {
 
         }
-        #endregion 
-        
         #endregion
+
+        #endregion
+
+        private void rtb_TextChanged(object sender, EventArgs e)
+        {
+            ischanged = true;
+        }
     }
 }

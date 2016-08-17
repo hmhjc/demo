@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotepadForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_new = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,7 +65,9 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmi_about = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.rtb = new System.Windows.Forms.RichTextBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -282,14 +285,14 @@
             // tsmi_autochangeline
             // 
             this.tsmi_autochangeline.Name = "tsmi_autochangeline";
-            this.tsmi_autochangeline.Size = new System.Drawing.Size(152, 22);
+            this.tsmi_autochangeline.Size = new System.Drawing.Size(144, 22);
             this.tsmi_autochangeline.Text = "自动换行(W)";
             this.tsmi_autochangeline.Click += new System.EventHandler(this.tsmi_autochangeline_Click);
             // 
             // tsmi_font
             // 
             this.tsmi_font.Name = "tsmi_font";
-            this.tsmi_font.Size = new System.Drawing.Size(152, 22);
+            this.tsmi_font.Size = new System.Drawing.Size(144, 22);
             this.tsmi_font.Text = "字体(F)";
             this.tsmi_font.Click += new System.EventHandler(this.tsmi_font_Click);
             // 
@@ -304,7 +307,7 @@
             // 状态栏SToolStripMenuItem
             // 
             this.状态栏SToolStripMenuItem.Name = "状态栏SToolStripMenuItem";
-            this.状态栏SToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.状态栏SToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.状态栏SToolStripMenuItem.Text = "状态栏(S)";
             // 
             // 帮助HToolStripMenuItem
@@ -337,21 +340,30 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.richTextBox1);
+            this.panel1.Controls.Add(this.rtb);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1269, 623);
             this.panel1.TabIndex = 2;
             // 
-            // richTextBox1
+            // rtb
             // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1269, 623);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb.Location = new System.Drawing.Point(0, 0);
+            this.rtb.Name = "rtb";
+            this.rtb.Size = new System.Drawing.Size(1269, 623);
+            this.rtb.TabIndex = 0;
+            this.rtb.Text = "";
+            this.rtb.TextChanged += new System.EventHandler(this.rtb_TextChanged);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.Filter = "TXT文件|*.txt";
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "TXT文件|*.txt";
             // 
             // NotepadForm
             // 
@@ -360,9 +372,10 @@
             this.ClientSize = new System.Drawing.Size(1269, 648);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "NotepadForm";
-            this.Text = "notepad";
+            this.Text = "无标题 - 记事本";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -408,6 +421,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem tsmi_about;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox rtb;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
