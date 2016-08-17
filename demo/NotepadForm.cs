@@ -9,7 +9,10 @@ namespace demo
 {
     public partial class NotepadForm : Form
     {
+        //记录是否被修改过
         bool ischanged = false;
+        //保存文件名
+        string filename = null;
         public NotepadForm()
         {
             InitializeComponent();
@@ -72,8 +75,8 @@ namespace demo
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                string fName = openFileDialog1.FileName;
-                FileInfo finfo = new FileInfo(fName);
+                filename = openFileDialog1.FileName;
+                FileInfo finfo = new FileInfo(filename);
                 this.Text = finfo.Name;
                 this.Text += "-记事本";
                 StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.UTF8);
@@ -95,8 +98,9 @@ namespace demo
             {
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    //读取的时候设置字符编码为Default
+                    //保存的时候把文件名放到全局变量filename中
                     StreamWriter c = new StreamWriter(saveFileDialog1.FileName);
+                    filename = saveFileDialog1.FileName;
                     c.Write(rtb.Text);
                     c.Close();
                     this.Text = saveFileDialog1.FileName.ToString().Substring(saveFileDialog1.FileName.ToString().LastIndexOf("\\") + 1);
@@ -104,7 +108,7 @@ namespace demo
             }
             else
             {
-                StreamWriter c = new StreamWriter(this.Text);
+                StreamWriter c = new StreamWriter(filename);
                 c.Write(rtb.Text);
                 c.Close();
             }
