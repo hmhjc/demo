@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotepadForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,8 +69,22 @@
             this.rtb = new System.Windows.Forms.RichTextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.撤销UToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.剪切TToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.复制CToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.粘贴PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.删除DToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.全选AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.从右到左的阅读顺序RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printDialog1 = new System.Windows.Forms.PrintDialog();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -220,6 +235,7 @@
             this.tsmi_delete.Name = "tsmi_delete";
             this.tsmi_delete.Size = new System.Drawing.Size(187, 22);
             this.tsmi_delete.Text = "删除(L)             Del";
+            this.tsmi_delete.Click += new System.EventHandler(this.tsmi_delete_Click);
             // 
             // toolStripSeparator4
             // 
@@ -340,6 +356,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.toolStrip1);
             this.panel1.Controls.Add(this.rtb);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 25);
@@ -349,12 +366,14 @@
             // 
             // rtb
             // 
+            this.rtb.ContextMenuStrip = this.contextMenuStrip1;
             this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb.Location = new System.Drawing.Point(0, 0);
             this.rtb.Name = "rtb";
             this.rtb.Size = new System.Drawing.Size(1269, 623);
             this.rtb.TabIndex = 0;
             this.rtb.Text = "";
+            this.rtb.SelectionChanged += new System.EventHandler(this.rtb_SelectionChanged);
             this.rtb.TextChanged += new System.EventHandler(this.rtb_TextChanged);
             // 
             // openFileDialog1
@@ -364,6 +383,94 @@
             // saveFileDialog1
             // 
             this.saveFileDialog1.Filter = "TXT文件|*.txt";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.撤销UToolStripMenuItem,
+            this.toolStripSeparator7,
+            this.剪切TToolStripMenuItem,
+            this.复制CToolStripMenuItem,
+            this.粘贴PToolStripMenuItem,
+            this.删除DToolStripMenuItem,
+            this.toolStripSeparator8,
+            this.全选AToolStripMenuItem,
+            this.toolStripSeparator9,
+            this.从右到左的阅读顺序RToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(201, 176);
+            // 
+            // 撤销UToolStripMenuItem
+            // 
+            this.撤销UToolStripMenuItem.Name = "撤销UToolStripMenuItem";
+            this.撤销UToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.撤销UToolStripMenuItem.Text = "撤销(U)";
+            this.撤销UToolStripMenuItem.Click += new System.EventHandler(this.撤销UToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(197, 6);
+            // 
+            // 剪切TToolStripMenuItem
+            // 
+            this.剪切TToolStripMenuItem.Name = "剪切TToolStripMenuItem";
+            this.剪切TToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.剪切TToolStripMenuItem.Text = "剪切(T)";
+            this.剪切TToolStripMenuItem.Click += new System.EventHandler(this.剪切TToolStripMenuItem_Click);
+            // 
+            // 复制CToolStripMenuItem
+            // 
+            this.复制CToolStripMenuItem.Name = "复制CToolStripMenuItem";
+            this.复制CToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.复制CToolStripMenuItem.Text = "复制(C)";
+            this.复制CToolStripMenuItem.Click += new System.EventHandler(this.复制CToolStripMenuItem_Click);
+            // 
+            // 粘贴PToolStripMenuItem
+            // 
+            this.粘贴PToolStripMenuItem.Name = "粘贴PToolStripMenuItem";
+            this.粘贴PToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.粘贴PToolStripMenuItem.Text = "粘贴(P)";
+            // 
+            // 删除DToolStripMenuItem
+            // 
+            this.删除DToolStripMenuItem.Name = "删除DToolStripMenuItem";
+            this.删除DToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.删除DToolStripMenuItem.Text = "删除(D)";
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(197, 6);
+            // 
+            // 全选AToolStripMenuItem
+            // 
+            this.全选AToolStripMenuItem.Name = "全选AToolStripMenuItem";
+            this.全选AToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.全选AToolStripMenuItem.Text = "全选(A)";
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(197, 6);
+            // 
+            // 从右到左的阅读顺序RToolStripMenuItem
+            // 
+            this.从右到左的阅读顺序RToolStripMenuItem.Name = "从右到左的阅读顺序RToolStripMenuItem";
+            this.从右到左的阅读顺序RToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.从右到左的阅读顺序RToolStripMenuItem.Text = "从右到左的阅读顺序(R)";
+            // 
+            // printDialog1
+            // 
+            this.printDialog1.UseEXDialog = true;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1269, 25);
+            this.toolStrip1.TabIndex = 1;
+            this.toolStrip1.Text = "toolStrip1";
             // 
             // NotepadForm
             // 
@@ -376,9 +483,12 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "NotepadForm";
             this.Text = "无标题 - 记事本";
+            this.Load += new System.EventHandler(this.NotepadForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -424,5 +534,18 @@
         private System.Windows.Forms.RichTextBox rtb;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 撤销UToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem 剪切TToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 复制CToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 粘贴PToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 删除DToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripMenuItem 全选AToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripMenuItem 从右到左的阅读顺序RToolStripMenuItem;
+        private System.Windows.Forms.PrintDialog printDialog1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
     }
 }

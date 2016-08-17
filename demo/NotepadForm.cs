@@ -13,6 +13,8 @@ namespace demo
         bool ischanged = false;
         //保存文件名
         string filename = null;
+        //选中的文字
+        string selectText = null;
         public NotepadForm()
         {
             InitializeComponent();
@@ -28,40 +30,7 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_new_Click(object sender, EventArgs e)
         {
-            if (ischanged)
-            {
-                //如果已经修改过之后,保存
-                string s = this.Text.ToString();
-                string[] s1 = s.Split('-');
-                s = s1[0];
-                DialogResult dr;
-                dr = MessageBox.Show("是否将内容保存到 " + s, "记事本", MessageBoxButtons.YesNoCancel,
-               MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
-                if (dr == DialogResult.Yes)
-                {
-                    //保存
-                    tsmi_save_Click(null, null);
-                }
-                else if (dr == DialogResult.No)
-                {
-                    //不保存就清空内容
-                    rtb.Text = "";
-                    this.Text = "无标题 - 记事本";
-                }
-                else if (dr == DialogResult.Cancel)
-                {
-                    return;
-                }
-                else
-                {
-                    return;
-                }
-            }
-            else
-            {
-                rtb.Text = "";
-                this.Text = "无标题 - 记事本";
-            }
+            new_action();
         }
         #endregion
 
@@ -73,17 +42,11 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_open_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                filename = openFileDialog1.FileName;
-                FileInfo finfo = new FileInfo(filename);
-                this.Text = finfo.Name;
-                this.Text += "-记事本";
-                StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.UTF8);
-                rtb.Text = sr.ReadToEnd();
-                sr.Close();
-            }
+            open_action();
+           
         }
+
+      
         #endregion
 
         #region tsmi_save_Click(object sender, EventArgs e) :: save file;保存文件
@@ -154,19 +117,20 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_print_Click(object sender, EventArgs e)
         {
-
+            printDialog1.Document = printDocument1;
+                  printDialog1.ShowDialog();
         }
         #endregion
 
-        #region tsmi_exit_Click(object sender, EventArgs e) :: exit:推出
+        #region tsmi_exit_Click(object sender, EventArgs e) :: exit:退出
         /// <summary>
-        /// exit:推出
+        /// exit:退出
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tsmi_exit_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
         #endregion
 
@@ -178,8 +142,10 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_revocation_Click(object sender, EventArgs e)
         {
-
+            revocation();
         }
+
+     
         #endregion
 
         #region tsmi_cut_Click(object sender, EventArgs e) :: cut;剪切
@@ -190,8 +156,11 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_cut_Click(object sender, EventArgs e)
         {
-
+            cut_action();
+           
         }
+
+        
         #endregion
 
         #region tsmi_copy_Click(object sender, EventArgs e) ::  copy;复制
@@ -202,7 +171,13 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_copy_Click(object sender, EventArgs e)
         {
+            copy_action();
 
+        }
+
+        private void copy_action()
+        {
+            this.rtb.Copy();
         }
         #endregion
 
@@ -214,7 +189,7 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_paste_Click(object sender, EventArgs e)
         {
-
+            this.rtb.Paste();
         }
         #endregion
 
@@ -274,7 +249,7 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_allselect_Click(object sender, EventArgs e)
         {
-
+            this.rtb.SelectAll();
         }
         #endregion
 
@@ -286,7 +261,12 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_time_Click(object sender, EventArgs e)
         {
-
+            string front = rtb.Text.Substring(0, rtb.SelectionStart);
+                         string back = rtb.Text.Substring(rtb.SelectionStart,
+                             rtb.Text.Length - rtb.SelectionStart);
+            rtb.Text = front + DateTime.Now.ToString() + back;
+            rtb.SelectionStart = rtb.TextLength;
+            rtb.Focus();
         }
         #endregion
 
@@ -298,8 +278,11 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_autochangeline_Click(object sender, EventArgs e)
         {
-
+            autochangeline();
+           
         }
+
+        
         #endregion
 
         #region tsmi_font_Click(object sender, EventArgs e) :: font setting;字体设置
@@ -326,11 +309,180 @@ namespace demo
         }
         #endregion
 
-        #endregion
-
+        #region rtb_TextChanged(object sender, EventArgs e) :: 文字是否改变
+        /// <summary>
+        /// rtb_TextChanged(object sender, EventArgs e);文字变化时,设置全局变量ischanged为true
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void rtb_TextChanged(object sender, EventArgs e)
         {
             ischanged = true;
+        }
+        #endregion
+       
+        #region rtb_SelectionChanged(object sender, EventArgs e);选中文字时的操作
+        /// <summary>
+        /// rtb_SelectionChanged(object sender, EventArgs e);选中文字时的操作
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void rtb_SelectionChanged(object sender, EventArgs e)
+        {
+            if (this.rtb.SelectedText.Equals(""))
+            {
+                tsmi_cut.Enabled = false;
+                tsmi_copy.Enabled = false;
+                tsmi_delete.Enabled = false;
+            }
+            else
+            {
+                tsmi_cut.Enabled = true;
+                tsmi_copy.Enabled = true;
+                tsmi_delete.Enabled = true;
+                selectText = rtb.SelectedText;
+            }
+        }
+
+        #endregion
+
+        #endregion
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsmi_delete_Click(object sender, EventArgs e)
+        {
+            this.rtb.SelectedText = "";
+        }
+
+        private void 撤销UToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            revocation();
+        }
+
+        private void revocation()
+        {
+            rtb.Undo();
+        }
+
+        private void cut_action()
+        {
+            this.rtb.Cut();
+        }
+
+        private void autochangeline()
+        {
+            if (rtb.WordWrap)
+            {
+                tsmi_autochangeline.Checked = false;
+                rtb.WordWrap = false;
+            }
+            else
+            {
+                tsmi_autochangeline.Checked = true;
+                rtb.WordWrap = true;
+            }
+        }
+        #region new_action() :: new_action();新建操作
+        /// <summary>
+        /// new_action();新建操作
+        /// </summary>
+        private void new_action()
+        {
+
+            if (ischanged)
+            {
+                //如果已经修改过之后,保存
+                string s = this.Text.ToString();
+                string[] s1 = s.Split('-');
+                s = s1[0];
+                DialogResult dr;
+                dr = MessageBox.Show("是否将内容保存到 " + s, "记事本", MessageBoxButtons.YesNoCancel,
+               MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+                if (dr == DialogResult.Yes)
+                {
+                    //保存
+                    tsmi_save_Click(null, null);
+                }
+                else if (dr == DialogResult.No)
+                {
+                    //不保存就清空内容
+                    rtb.Text = "";
+                    this.Text = "无标题 - 记事本";
+                }
+                else if (dr == DialogResult.Cancel)
+                {
+                    return;
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                rtb.Text = "";
+                this.Text = "无标题 - 记事本";
+            }
+        }
+        #endregion
+
+        #region open_action() :: open_action();打开操作
+        /// <summary>
+        /// open_action();打开操作
+        /// </summary>
+        private void open_action()
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                filename = openFileDialog1.FileName;
+                FileInfo finfo = new FileInfo(filename);
+                this.Text = finfo.Name;
+                this.Text += "-记事本";
+                StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.UTF8);
+                rtb.Text = sr.ReadToEnd();
+                sr.Close();
+            }
+        }
+        #endregion
+
+        private void 剪切TToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cut_action();
+        }
+
+        private void 复制CToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            copy_action();
+        }
+
+        private void NotepadForm_Load(object sender, EventArgs e)
+        {
+            //初始化,撤销,剪切,复制,删除不可用
+            tsmi_revocation.Enabled = false;
+            tsmi_copy.Enabled = false;
+            tsmi_cut.Enabled = false;
+            tsmi_delete.Enabled = false;
+            if (rtb.Equals(""))
+            {
+                tsmi_find.Enabled = false;
+                tsmi_findnext.Enabled = false;
+            }
+            else
+            {
+                tsmi_find.Enabled = true;
+                tsmi_findnext.Enabled = true;
+            }
+            if (Clipboard.ContainsText())
+            {
+                tsmi_paste.Enabled = true;
+            }
+            else
+            {
+                tsmi_paste.Enabled = false;
+            }
         }
     }
 }
