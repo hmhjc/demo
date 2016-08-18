@@ -9,17 +9,22 @@ namespace demo
 {
     public partial class NotepadForm : Form
     {
-        //记录是否被修改过
-        bool ischanged = false;
-        //保存文件名
-        string filename = null;
-        //选中的文字
-        string selectText = null;
         public NotepadForm()
         {
             InitializeComponent();
         }
+        #region ★ Var
+        //记录是否被修改过
+        bool ischanged = false;
+        //保存文件名
+        string path = "";
+        //选中的文字
+        string selectText = null;
+        #endregion
+
         #region ★ Event
+
+        #region tsmi_Click ::菜单栏单击事件 
 
         #region tsmi_new_Click(object sender, EventArgs e) :: new file;新建文件
         /// <summary>
@@ -43,10 +48,10 @@ namespace demo
         private void tsmi_open_Click(object sender, EventArgs e)
         {
             open_action();
-           
+
         }
 
-      
+
         #endregion
 
         #region tsmi_save_Click(object sender, EventArgs e) :: save file;保存文件
@@ -59,23 +64,16 @@ namespace demo
         {
             if (this.Text.Equals("无标题 - 记事本"))
             {
-                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    //保存的时候把文件名放到全局变量filename中
-                    StreamWriter c = new StreamWriter(saveFileDialog1.FileName);
-                    filename = saveFileDialog1.FileName;
-                    c.Write(rtb.Text);
-                    c.Close();
-                    this.Text = saveFileDialog1.FileName.ToString().Substring(saveFileDialog1.FileName.ToString().LastIndexOf("\\") + 1);
-                }
+                saveas_action();
             }
             else
             {
-                StreamWriter c = new StreamWriter(filename);
-                c.Write(rtb.Text);
-                c.Close();
+                save_action();
+
             }
         }
+
+
         #endregion
 
         #region tsmi_saveas_Click(object sender, EventArgs e) :: save as;另存为
@@ -86,15 +84,10 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_saveas_Click(object sender, EventArgs e)
         {
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                //读取的时候设置字符编码为Default
-                StreamWriter c = new StreamWriter(saveFileDialog1.FileName);
-                c.Write(rtb.Text);
-                c.Close();
-                this.Text = saveFileDialog1.FileName.ToString().Substring(saveFileDialog1.FileName.ToString().LastIndexOf("\\") + 1);
-            }
+            saveas_action();
         }
+
+
         #endregion
 
         #region tsmi_pageset_Click(object sender, EventArgs e) :: paper setting;页面设置
@@ -105,7 +98,8 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_pageset_Click(object sender, EventArgs e)
         {
-
+            pageSetupDialog1.Document = printDocument1;
+            pageSetupDialog1.ShowDialog();
         }
         #endregion
 
@@ -118,7 +112,7 @@ namespace demo
         private void tsmi_print_Click(object sender, EventArgs e)
         {
             printDialog1.Document = printDocument1;
-                  printDialog1.ShowDialog();
+            printDialog1.ShowDialog();
         }
         #endregion
 
@@ -145,7 +139,7 @@ namespace demo
             revocation();
         }
 
-     
+
         #endregion
 
         #region tsmi_cut_Click(object sender, EventArgs e) :: cut;剪切
@@ -157,10 +151,10 @@ namespace demo
         private void tsmi_cut_Click(object sender, EventArgs e)
         {
             cut_action();
-           
+
         }
 
-        
+
         #endregion
 
         #region tsmi_copy_Click(object sender, EventArgs e) ::  copy;复制
@@ -189,8 +183,25 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_paste_Click(object sender, EventArgs e)
         {
-            this.rtb.Paste();
+            paste_action();
+          
         }
+
+
+        #endregion
+
+        #region tsmi_delete_Click(object sender, EventArgs e) :: delete;删除操作
+        /// <summary>
+        /// delete;删除操作
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsmi_delete_Click(object sender, EventArgs e)
+        {
+            delete_action();
+        }
+
+       
         #endregion
 
         #region tsmi_find_Click(object sender, EventArgs e) :: find;查找
@@ -201,8 +212,9 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_find_Click(object sender, EventArgs e)
         {
-
+            find_action();
         }
+
         #endregion
 
         #region tsmi_findnext_Click(object sender, EventArgs e) :: findnext;查找下一个
@@ -213,7 +225,7 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_findnext_Click(object sender, EventArgs e)
         {
-
+            find_action();
         }
         #endregion
 
@@ -237,8 +249,10 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_toline_Click(object sender, EventArgs e)
         {
-
+            toline_action();
         }
+
+
         #endregion
 
         #region tsmi_allselect_Click(object sender, EventArgs e) :: allselect;全选
@@ -262,8 +276,8 @@ namespace demo
         private void tsmi_time_Click(object sender, EventArgs e)
         {
             string front = rtb.Text.Substring(0, rtb.SelectionStart);
-                         string back = rtb.Text.Substring(rtb.SelectionStart,
-                             rtb.Text.Length - rtb.SelectionStart);
+            string back = rtb.Text.Substring(rtb.SelectionStart,
+                rtb.Text.Length - rtb.SelectionStart);
             rtb.Text = front + DateTime.Now.ToString() + back;
             rtb.SelectionStart = rtb.TextLength;
             rtb.Focus();
@@ -279,10 +293,10 @@ namespace demo
         private void tsmi_autochangeline_Click(object sender, EventArgs e)
         {
             autochangeline();
-           
+
         }
 
-        
+
         #endregion
 
         #region tsmi_font_Click(object sender, EventArgs e) :: font setting;字体设置
@@ -293,8 +307,10 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_font_Click(object sender, EventArgs e)
         {
-
+            fontsetting_action();
         }
+
+
         #endregion
 
         #region tsmi_about_Click(object sender, EventArgs e) :: about;关于
@@ -309,6 +325,30 @@ namespace demo
         }
         #endregion
 
+        #region tsmi_state_Click(object sender, EventArgs e) :: state;状态栏
+        /// <summary>
+        /// state;状态栏
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsmi_state_Click(object sender, EventArgs e)
+        {
+            if (tsmi_state.Checked)
+            {
+                tsmi_state.Checked = false;
+                statusStrip1.Visible = false;
+            }
+            else
+            {
+                tsmi_state.Checked = true;
+                statusStrip1.Visible = true;
+            }
+        }
+        #endregion
+        #endregion
+
+        #region rtb_Text :: 文字改变事件
+
         #region rtb_TextChanged(object sender, EventArgs e) :: 文字是否改变
         /// <summary>
         /// rtb_TextChanged(object sender, EventArgs e);文字变化时,设置全局变量ischanged为true
@@ -320,7 +360,7 @@ namespace demo
             ischanged = true;
         }
         #endregion
-       
+
         #region rtb_SelectionChanged(object sender, EventArgs e);选中文字时的操作
         /// <summary>
         /// rtb_SelectionChanged(object sender, EventArgs e);选中文字时的操作
@@ -342,49 +382,125 @@ namespace demo
                 tsmi_delete.Enabled = true;
                 selectText = rtb.SelectedText;
             }
+            string[] str = rtb.Text.Split('\r', '\n');
+            int row = 1, column = 1, pos = rtb.SelectionStart;
+
+            foreach (string s in str)
+                Console.WriteLine(s);
+            Console.WriteLine("pos={0}", pos);
+
+            for (int i = 0; i < str.Length && pos - str[i].Length > 0; i++)
+            {
+                pos = pos - str[i].Length - 1;
+                row = i + 2;
+            }
+            column = pos + 1;
+            toolStripStatusLabel2.Text = "第 " + row + " 行，第 " + column + " 列";
         }
 
         #endregion
-
         #endregion
+
+        #region 右击事件
+        #region 撤销UToolStripMenuItem_Click(object sender, EventArgs e) :: 撤销UToolStripMenuItem_Click;右键撤销操作
         /// <summary>
-        /// 
+        /// 撤销UToolStripMenuItem_Click;右键撤销操作
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void tsmi_delete_Click(object sender, EventArgs e)
-        {
-            this.rtb.SelectedText = "";
-        }
-
         private void 撤销UToolStripMenuItem_Click(object sender, EventArgs e)
         {
             revocation();
         }
+        #endregion
 
-        private void revocation()
+        #region 剪切TToolStripMenuItem_Click(object sender, EventArgs e) :: 剪切TToolStripMenuItem_Click;右键剪切
+        private void 剪切TToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            rtb.Undo();
+            cut_action();
         }
+        #endregion
 
-        private void cut_action()
+        #region 复制CToolStripMenuItem_Click(object sender, EventArgs e) :: 复制CToolStripMenuItem_Click;右键复制操作
+        private void 复制CToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.rtb.Cut();
+            copy_action();
         }
-
-        private void autochangeline()
+        #endregion 
+       
+        #region 粘贴PToolStripMenuItem_Click(object sender, EventArgs e) :: 粘贴PToolStripMenuItem_Click;右键粘贴
+        private void 粘贴PToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (rtb.WordWrap)
+            paste_action();
+        }
+        #endregion
+
+        #region 删除DToolStripMenuItem_Click(object sender, EventArgs e) :: 删除DToolStripMenuItem_Click;右键删除
+        private void 删除DToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            delete_action();
+        }
+        #endregion
+
+        #endregion
+
+        #region NotepadForm_FormClosing(object sender, FormClosingEventArgs e) :: NotepadForm_FormClosing;关闭按钮
+        private void NotepadForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (ischanged)
             {
-                tsmi_autochangeline.Checked = false;
-                rtb.WordWrap = false;
+                if (!("".Equals(path)))
+                {
+                    DialogResult dr = MessageBox.Show("是否将更改保存到" + path + "?", "记事本",
+                    MessageBoxButtons.YesNoCancel);
+                    if (dr == DialogResult.Yes)
+                    {
+
+                    }
+                }
+            }
+        } 
+        #endregion
+      
+        #endregion
+
+        #region ★ Function
+        #region NotepadForm_Load(object sender, EventArgs e) :: NotepadForm_Load;初始化操作
+        private void NotepadForm_Load(object sender, EventArgs e)
+        {
+            //初始化,撤销,剪切,复制,删除不可用
+            tsmi_revocation.Enabled = false;
+            tsmi_copy.Enabled = false;
+            tsmi_cut.Enabled = false;
+            tsmi_delete.Enabled = false;
+            if (rtb.Equals(""))
+            {
+                tsmi_find.Enabled = false;
+                tsmi_findnext.Enabled = false;
             }
             else
             {
-                tsmi_autochangeline.Checked = true;
-                rtb.WordWrap = true;
+                tsmi_find.Enabled = true;
+                tsmi_findnext.Enabled = true;
             }
-        }
+            if (Clipboard.ContainsText())
+            {
+                tsmi_paste.Enabled = true;
+            }
+            else
+            {
+                tsmi_paste.Enabled = false;
+            }
+        } 
+        #endregion
+
+        #region revocation() :: revocation;撤销操作
+        private void revocation()
+        {
+            rtb.Undo();
+        } 
+        #endregion
+
         #region new_action() :: new_action();新建操作
         /// <summary>
         /// new_action();新建操作
@@ -428,7 +544,7 @@ namespace demo
             }
         }
         #endregion
-
+      
         #region open_action() :: open_action();打开操作
         /// <summary>
         /// open_action();打开操作
@@ -437,8 +553,8 @@ namespace demo
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                filename = openFileDialog1.FileName;
-                FileInfo finfo = new FileInfo(filename);
+                path = openFileDialog1.FileName;
+                FileInfo finfo = new FileInfo(path);
                 this.Text = finfo.Name;
                 this.Text += "-记事本";
                 StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.UTF8);
@@ -447,42 +563,102 @@ namespace demo
             }
         }
         #endregion
-
-        private void 剪切TToolStripMenuItem_Click(object sender, EventArgs e)
+      
+        #region autochangeline;自动换行
+        private void autochangeline()
         {
-            cut_action();
-        }
-
-        private void 复制CToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            copy_action();
-        }
-
-        private void NotepadForm_Load(object sender, EventArgs e)
-        {
-            //初始化,撤销,剪切,复制,删除不可用
-            tsmi_revocation.Enabled = false;
-            tsmi_copy.Enabled = false;
-            tsmi_cut.Enabled = false;
-            tsmi_delete.Enabled = false;
-            if (rtb.Equals(""))
+            if (rtb.WordWrap)
             {
-                tsmi_find.Enabled = false;
-                tsmi_findnext.Enabled = false;
+                tsmi_autochangeline.Checked = false;
+                rtb.WordWrap = false;
             }
             else
             {
-                tsmi_find.Enabled = true;
-                tsmi_findnext.Enabled = true;
+                tsmi_autochangeline.Checked = true;
+                rtb.WordWrap = true;
             }
-            if (Clipboard.ContainsText())
+        } 
+        #endregion
+        
+        #region cut_action() :: cut;剪切操作
+        private void cut_action()
+        {
+            this.rtb.Cut();
+        }
+        #endregion
+
+        #region paste_action() :: paste;粘贴操作
+        private void paste_action()
+        {
+            this.rtb.Paste();
+        }
+        #endregion
+
+        #region delete_action() :: 删除操作
+        private void delete_action()
+        {
+            this.rtb.SelectedText = "";
+        } 
+        #endregion
+
+        #region saveas_action() :: saveas_action;另存为操作 
+        private void saveas_action()
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                tsmi_paste.Enabled = true;
-            }
-            else
-            {
-                tsmi_paste.Enabled = false;
+                //读取的时候设置字符编码为Default
+                StreamWriter c = new StreamWriter(saveFileDialog1.FileName);
+                path = saveFileDialog1.FileName;
+                c.Write(rtb.Text);
+                c.Close();
+                this.Text = saveFileDialog1.FileName.ToString().Substring(saveFileDialog1.FileName.ToString().LastIndexOf("\\") + 1);
+                ischanged = false;
             }
         }
+        #endregion
+       
+        #region save_action() :: save_action;保存操作
+        private void save_action()
+        {
+            StreamWriter c = new StreamWriter(path);
+            c.Write(rtb.Text);
+            c.Close();
+            ischanged = false;
+        }
+        #endregion
+
+        #region fontsetting_action() :: fontsetting_action;字体设置
+        private void fontsetting_action()
+        {
+            FontDialog font = new FontDialog();
+            if (font.ShowDialog() == DialogResult.OK)
+            {
+                this.rtb.Font = font.Font;
+            }
+        }
+        #endregion
+
+        #region find_action() :: find;查找
+        private void find_action()
+        {
+            SearchForm search = new SearchForm();
+            search.Owner = this;
+            search.Show();
+        }
+        #endregion
+
+        #region toline_action() :: toline;转到指定行
+        private void toline_action()
+        {
+            ToLineForm tl = new ToLineForm();
+            tl.Owner = this;
+            tl.Show();
+        }
+
+        #endregion
+
+        #endregion
+
+       
     }
 }

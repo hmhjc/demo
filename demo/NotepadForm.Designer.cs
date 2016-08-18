@@ -60,15 +60,16 @@
             this.tsmi_autochangeline = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_font = new System.Windows.Forms.ToolStripMenuItem();
             this.查看VToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.状态栏SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_state = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助HToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.查看帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmi_about = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.rtb = new System.Windows.Forms.RichTextBox();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.撤销UToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
@@ -80,10 +81,15 @@
             this.全选AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.从右到左的阅读顺序RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
+            this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,7 +103,7 @@
             this.帮助HToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1269, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(627, 25);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -315,16 +321,17 @@
             // 查看VToolStripMenuItem
             // 
             this.查看VToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.状态栏SToolStripMenuItem});
+            this.tsmi_state});
             this.查看VToolStripMenuItem.Name = "查看VToolStripMenuItem";
             this.查看VToolStripMenuItem.Size = new System.Drawing.Size(60, 21);
             this.查看VToolStripMenuItem.Text = "查看(V)";
             // 
-            // 状态栏SToolStripMenuItem
+            // tsmi_state
             // 
-            this.状态栏SToolStripMenuItem.Name = "状态栏SToolStripMenuItem";
-            this.状态栏SToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
-            this.状态栏SToolStripMenuItem.Text = "状态栏(S)";
+            this.tsmi_state.Name = "tsmi_state";
+            this.tsmi_state.Size = new System.Drawing.Size(152, 22);
+            this.tsmi_state.Text = "状态栏(S)";
+            this.tsmi_state.Click += new System.EventHandler(this.tsmi_state_Click);
             // 
             // 帮助HToolStripMenuItem
             // 
@@ -356,13 +363,35 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.toolStrip1);
+            this.panel1.Controls.Add(this.statusStrip1);
             this.panel1.Controls.Add(this.rtb);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1269, 623);
+            this.panel1.Size = new System.Drawing.Size(627, 336);
             this.panel1.TabIndex = 2;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel2});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 314);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(627, 22);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(612, 17);
+            this.toolStripStatusLabel1.Spring = true;
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(0, 17);
             // 
             // rtb
             // 
@@ -370,19 +399,11 @@
             this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb.Location = new System.Drawing.Point(0, 0);
             this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(1269, 623);
+            this.rtb.Size = new System.Drawing.Size(627, 336);
             this.rtb.TabIndex = 0;
             this.rtb.Text = "";
             this.rtb.SelectionChanged += new System.EventHandler(this.rtb_SelectionChanged);
             this.rtb.TextChanged += new System.EventHandler(this.rtb_TextChanged);
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.Filter = "TXT文件|*.txt";
-            // 
-            // saveFileDialog1
-            // 
-            this.saveFileDialog1.Filter = "TXT文件|*.txt";
             // 
             // contextMenuStrip1
             // 
@@ -398,7 +419,7 @@
             this.toolStripSeparator9,
             this.从右到左的阅读顺序RToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(201, 176);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(201, 198);
             // 
             // 撤销UToolStripMenuItem
             // 
@@ -431,12 +452,14 @@
             this.粘贴PToolStripMenuItem.Name = "粘贴PToolStripMenuItem";
             this.粘贴PToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.粘贴PToolStripMenuItem.Text = "粘贴(P)";
+            this.粘贴PToolStripMenuItem.Click += new System.EventHandler(this.粘贴PToolStripMenuItem_Click);
             // 
             // 删除DToolStripMenuItem
             // 
             this.删除DToolStripMenuItem.Name = "删除DToolStripMenuItem";
             this.删除DToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.删除DToolStripMenuItem.Text = "删除(D)";
+            this.删除DToolStripMenuItem.Click += new System.EventHandler(this.删除DToolStripMenuItem_Click);
             // 
             // toolStripSeparator8
             // 
@@ -460,34 +483,37 @@
             this.从右到左的阅读顺序RToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.从右到左的阅读顺序RToolStripMenuItem.Text = "从右到左的阅读顺序(R)";
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.Filter = "TXT文件|*.txt";
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "TXT文件|*.txt";
+            // 
             // printDialog1
             // 
             this.printDialog1.UseEXDialog = true;
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1269, 25);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
             // 
             // NotepadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1269, 648);
+            this.ClientSize = new System.Drawing.Size(627, 361);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "NotepadForm";
             this.Text = "无标题 - 记事本";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NotepadForm_FormClosing);
             this.Load += new System.EventHandler(this.NotepadForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -525,13 +551,13 @@
         private System.Windows.Forms.ToolStripMenuItem tsmi_autochangeline;
         private System.Windows.Forms.ToolStripMenuItem tsmi_font;
         private System.Windows.Forms.ToolStripMenuItem 查看VToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 状态栏SToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmi_state;
         private System.Windows.Forms.ToolStripMenuItem 帮助HToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 查看帮助ToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem tsmi_about;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RichTextBox rtb;
+        public System.Windows.Forms.RichTextBox rtb;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
@@ -546,6 +572,11 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem 从右到左的阅读顺序RToolStripMenuItem;
         private System.Windows.Forms.PrintDialog printDialog1;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
+        private System.Windows.Forms.FontDialog fontDialog1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
     }
 }
