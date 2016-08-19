@@ -13,6 +13,7 @@ namespace demo
         {
             InitializeComponent();
         }
+       
         #region ★ Var
         //记录是否被修改过
         bool ischanged = false;
@@ -20,6 +21,7 @@ namespace demo
         string path = "";
         //选中的文字
         string selectText = null;
+        
         #endregion
 
         #region ★ Event
@@ -35,7 +37,7 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_new_Click(object sender, EventArgs e)
         {
-            new_action();
+            new_action(ischanged,this.rtb);
         }
         #endregion
 
@@ -47,7 +49,7 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_open_Click(object sender, EventArgs e)
         {
-            open_action();
+            open_action(openFileDialog1,this.rtb);
 
         }
 
@@ -64,7 +66,7 @@ namespace demo
         {
             if (this.Text.Equals("无标题 - 记事本"))
             {
-                saveas_action();
+                saveas_action(saveFileDialog1,path);
             }
             else
             {
@@ -84,7 +86,7 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_saveas_Click(object sender, EventArgs e)
         {
-            saveas_action();
+            saveas_action(saveFileDialog1,path);
         }
 
 
@@ -136,7 +138,7 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_revocation_Click(object sender, EventArgs e)
         {
-            revocation();
+            revocation(rtb);
         }
 
 
@@ -237,8 +239,10 @@ namespace demo
         /// <param name="e"></param>
         private void tsmi_replace_Click(object sender, EventArgs e)
         {
-
+            replace_action();
         }
+
+       
         #endregion
 
         #region tsmi_toline_Click(object sender, EventArgs e) :: toline;转到
@@ -345,8 +349,7 @@ namespace demo
             }
         }
         #endregion
-        #endregion
-
+      
         #region rtb_Text :: 文字改变事件
 
         #region rtb_TextChanged(object sender, EventArgs e) :: 文字是否改变
@@ -400,8 +403,11 @@ namespace demo
 
         #endregion
         #endregion
+        
+        #endregion
 
         #region 右击事件
+       
         #region 撤销UToolStripMenuItem_Click(object sender, EventArgs e) :: 撤销UToolStripMenuItem_Click;右键撤销操作
         /// <summary>
         /// 撤销UToolStripMenuItem_Click;右键撤销操作
@@ -410,7 +416,7 @@ namespace demo
         /// <param name="e"></param>
         private void 撤销UToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            revocation();
+            revocation(rtb);
         }
         #endregion
 
@@ -455,17 +461,64 @@ namespace demo
                     MessageBoxButtons.YesNoCancel);
                     if (dr == DialogResult.Yes)
                     {
-
+                        StreamWriter c = new StreamWriter(path);
+                        c.Write(rtb.Text);
+                        c.Close();
+                        ischanged = false;
+                    }
+                    else if (dr==DialogResult.No)
+                    {
+                        e.Cancel = false;
+                    }
+                    else
+                    {
+                        e.Cancel = true;
                     }
                 }
+                else
+                {
+                    DialogResult dr = MessageBox.Show("是否将更改保存到 无标题?", "记事本",
+                        MessageBoxButtons.YesNoCancel);
+                    if (dr==DialogResult.Yes)
+                    {
+                        if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                        {
+                            StreamWriter c = new StreamWriter(saveFileDialog1.FileName);
+                            path = saveFileDialog1.FileName;
+                            c.Write(rtb.Text);
+                            c.Close();
+                            this.Text = saveFileDialog1.FileName.ToString().Substring(saveFileDialog1.FileName.ToString().LastIndexOf("\\") + 1);
+                            ischanged = false;
+                        }
+                        else
+                        {
+                            e.Cancel = true;
+                        }
+                    }
+                    else if (dr==DialogResult.No)
+                    {
+                        e.Cancel = false;
+                    }
+                    else
+                    {
+                        e.Cancel = true;
+                    }
+                }
+
             }
-        } 
+        }
         #endregion
-      
+
         #endregion
 
         #region ★ Function
-        #region NotepadForm_Load(object sender, EventArgs e) :: NotepadForm_Load;初始化操作
+
+        #region NotepadForm_Load(object sender, EventArgs e) :: NotepadForm_Load;初始化
+        /// <summary>
+        /// NotepadForm_Load;初始化
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NotepadForm_Load(object sender, EventArgs e)
         {
             //初始化,撤销,剪切,复制,删除不可用
@@ -494,18 +547,13 @@ namespace demo
         } 
         #endregion
 
-        #region revocation() :: revocation;撤销操作
-        private void revocation()
-        {
-            rtb.Undo();
-        } 
-        #endregion
-
-        #region new_action() :: new_action();新建操作
+        #region new_action(bool ischanged, RichTextBox rtb) :: new_action();新建操作
         /// <summary>
         /// new_action();新建操作
         /// </summary>
-        private void new_action()
+        /// <param name="ischanged">是否已经修改过文本</param>
+        /// <param name="rtb">RichTextBox,文本输入控件</param>
+        private void new_action(bool ischanged, RichTextBox rtb)
         {
 
             if (ischanged)
@@ -519,8 +567,10 @@ namespace demo
                MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
                 if (dr == DialogResult.Yes)
                 {
-                    //保存
+                    //保存之后再清空内容
                     tsmi_save_Click(null, null);
+                    rtb.Text = "";
+                    this.Text = "无标题 - 记事本";
                 }
                 else if (dr == DialogResult.No)
                 {
@@ -544,21 +594,35 @@ namespace demo
             }
         }
         #endregion
-      
-        #region open_action() :: open_action();打开操作
+
+        #region revocation(RichTextBox rtb) :: revocation;撤销操作
         /// <summary>
-        /// open_action();打开操作
+        /// revocation;撤销操作
         /// </summary>
-        private void open_action()
+        /// <param name="rtb"></param>
+        private void revocation(RichTextBox rtb)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            rtb.Undo();
+        }
+        #endregion
+
+        #region open_action(OpenFileDialog openFileDialog,RichTextBox richTextBox) :: open_action();打开操作
+        /// <summary>
+        /// open_action;打开操作
+        /// </summary>
+        /// <param name="openFileDialog"></param>
+        /// <param name="richTextBox"></param>
+        private void open_action(OpenFileDialog openFileDialog,RichTextBox richTextBox)
+        {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                path = openFileDialog1.FileName;
+
+                path = openFileDialog.FileName;
                 FileInfo finfo = new FileInfo(path);
                 this.Text = finfo.Name;
                 this.Text += "-记事本";
-                StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.UTF8);
-                rtb.Text = sr.ReadToEnd();
+                StreamReader sr = new StreamReader(openFileDialog.FileName, Encoding.UTF8);
+                richTextBox.Text = sr.ReadToEnd();
                 sr.Close();
             }
         }
@@ -602,16 +666,16 @@ namespace demo
         #endregion
 
         #region saveas_action() :: saveas_action;另存为操作 
-        private void saveas_action()
+        private void saveas_action(SaveFileDialog saveFileDialog,string path)
         {
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 //读取的时候设置字符编码为Default
-                StreamWriter c = new StreamWriter(saveFileDialog1.FileName);
+                StreamWriter c = new StreamWriter(saveFileDialog.FileName);
                 path = saveFileDialog1.FileName;
                 c.Write(rtb.Text);
                 c.Close();
-                this.Text = saveFileDialog1.FileName.ToString().Substring(saveFileDialog1.FileName.ToString().LastIndexOf("\\") + 1);
+                this.Text = saveFileDialog1.FileName.ToString().Substring(saveFileDialog.FileName.ToString().LastIndexOf("\\") + 1);
                 ischanged = false;
             }
         }
@@ -657,8 +721,14 @@ namespace demo
 
         #endregion
 
+
+        private void replace_action()
+        {
+            ChangeForm cf = new ChangeForm();
+            cf.Owner = this;
+            cf.Show();
+        }
         #endregion
 
-       
     }
 }
