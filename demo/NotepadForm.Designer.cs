@@ -66,9 +66,6 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmi_about = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.rtb = new System.Windows.Forms.RichTextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.撤销UToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,16 +78,21 @@
             this.全选AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.从右到左的阅读顺序RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.eventLog1 = new System.Diagnostics.EventLog();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -329,7 +331,7 @@
             // tsmi_state
             // 
             this.tsmi_state.Name = "tsmi_state";
-            this.tsmi_state.Size = new System.Drawing.Size(152, 22);
+            this.tsmi_state.Size = new System.Drawing.Size(127, 22);
             this.tsmi_state.Text = "状态栏(S)";
             this.tsmi_state.Click += new System.EventHandler(this.tsmi_state_Click);
             // 
@@ -363,43 +365,19 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.statusStrip1);
             this.panel1.Controls.Add(this.rtb);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 25);
+            this.panel1.Controls.Add(this.statusStrip1);
+            this.panel1.Location = new System.Drawing.Point(0, 48);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(627, 336);
+            this.panel1.Size = new System.Drawing.Size(627, 313);
             this.panel1.TabIndex = 2;
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripStatusLabel2});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 314);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(627, 22);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(612, 17);
-            this.toolStripStatusLabel1.Spring = true;
-            // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(0, 17);
             // 
             // rtb
             // 
             this.rtb.ContextMenuStrip = this.contextMenuStrip1;
-            this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb.Location = new System.Drawing.Point(0, 0);
+            this.rtb.Location = new System.Drawing.Point(0, 33);
             this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(627, 336);
+            this.rtb.Size = new System.Drawing.Size(624, 281);
             this.rtb.TabIndex = 0;
             this.rtb.Text = "";
             this.rtb.SelectionChanged += new System.EventHandler(this.rtb_SelectionChanged);
@@ -419,7 +397,7 @@
             this.toolStripSeparator9,
             this.从右到左的阅读顺序RToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(201, 198);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(201, 176);
             // 
             // 撤销UToolStripMenuItem
             // 
@@ -483,6 +461,28 @@
             this.从右到左的阅读顺序RToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.从右到左的阅读顺序RToolStripMenuItem.Text = "从右到左的阅读顺序(R)";
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel2});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 291);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(627, 22);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(612, 17);
+            this.toolStripStatusLabel1.Spring = true;
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(0, 17);
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.Filter = "TXT文件|*.txt";
@@ -495,6 +495,10 @@
             // 
             this.printDialog1.UseEXDialog = true;
             // 
+            // eventLog1
+            // 
+            this.eventLog1.SynchronizingObject = this;
+            // 
             // NotepadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -503,18 +507,21 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "NotepadForm";
             this.Text = "无标题 - 记事本";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NotepadForm_FormClosing);
             this.Load += new System.EventHandler(this.NotepadForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NotepadForm_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -578,5 +585,6 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Diagnostics.EventLog eventLog1;
     }
 }
