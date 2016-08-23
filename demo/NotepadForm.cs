@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -22,6 +23,9 @@ namespace demo
         //选中的文字
         string selectText = null;
 
+        private System.Drawing.Text.InstalledFontCollection objFont = new System.Drawing.Text.InstalledFontCollection();
+
+        bool isbold = false;
         #endregion
 
         #region ★ Event
@@ -586,6 +590,11 @@ namespace demo
         /// <param name="e"></param>
         private void NotepadForm_Load(object sender, EventArgs e)
         {
+            //foreach (System.Drawing.FontFamily i in objFont.Families)
+            //{
+            //    cboFont.Items.Add(i.Name.ToString());
+            //}
+            //cboFont.SelectedIndex = 0;
             //初始化,撤销,剪切,复制,删除不可用
             tsmi_revocation.Enabled = false;
             tsmi_copy.Enabled = false;
@@ -833,10 +842,45 @@ namespace demo
             rtb.Text = front + DateTime.Now.ToString() + back;
             rtb.SelectionStart = rtb.TextLength;
             rtb.Focus();
-        } 
-        #endregion
-       
+        }
         #endregion
 
+        #endregion
+
+        //private void cboFont_MeasureItem(object sender, MeasureItemEventArgs e)
+        //{
+        //   Font objFonts = new Font(cboFont.Items[e.Index].ToString(), 14);
+        //    e.ItemHeight = objFonts.Height;
+        //}
+
+        //private void cboFont_DrawItem(object sender, DrawItemEventArgs e)
+        //{
+        //    System.Drawing.Font objFonts = new Font(cboFont.Items[e.Index].ToString(), 14);
+        //    e.DrawBackground();
+        //    e.Graphics.DrawString(cboFont.Items[e.Index].ToString(), objFonts, new SolidBrush(e.ForeColor), new Point(e.Bounds.Left, e.Bounds.Top));
+        //}
+
+        //private void btn_bold_Click(object sender, EventArgs e)
+        //{
+        //    MessageBox.Show("fafaa");
+        //    if (isbold)
+        //    {
+        //        rtb.SelectionFont = new Font(Font, FontStyle.Regular);
+        //        isbold = true;
+        //        btn_bold.BackColor = Color.Transparent;
+        //    }
+        //    else
+        //    {
+        //    rtb.SelectionFont = new Font(Font, FontStyle.Bold);
+        //        isbold = false;
+        //        btn_bold.BackColor = Color.Blue;
+        //    }
+
+        //}
+
+        //private void button2_Click(object sender, EventArgs e)
+        //{
+        //    rtb.SelectionFont = new Font(Font, FontStyle.Regular);
+        //}
     }
 }
