@@ -24,8 +24,12 @@ namespace demo
         string selectText = null;
 
         private System.Drawing.Text.InstalledFontCollection objFont = new System.Drawing.Text.InstalledFontCollection();
-
-        bool isbold = false;
+        //是否加粗
+        bool isBold = false;
+        //是否倾斜
+        bool isItalic = false;
+        //是否有下划线
+        bool isUnderline = false;
         #endregion
 
         #region ★ Event
@@ -843,8 +847,212 @@ namespace demo
             rtb.SelectionStart = rtb.TextLength;
             rtb.Focus();
         }
+
         #endregion
 
+        private void tsbtn_bold_Click(object sender, EventArgs e)
+        {
+            changetextfont("Bold");
+        }
+
+        private void tsbtn_Italic_Click(object sender, EventArgs e)
+        {
+            changetextfont("Italic");
+        }
+
+        private void tsbtn_Underline_Click(object sender, EventArgs e)
+        {
+            changetextfont("Underline");
+        }
+
+        private void changetextfont(string fontstyle)
+        {
+            switch (fontstyle)
+            {
+                case "Bold":
+                    if (isBold)
+                    {
+                        //加粗状态下,取消加粗
+                        isBold = false;
+                        tsbtn_bold.BackColor = Color.Transparent;
+                        if (isItalic)
+                        {
+                            //倾斜的时候
+                            if (isUnderline)
+                            {
+                                //加粗倾斜且有下划线,此时设置倾斜+下划线
+                                rtb.SelectionFont = new Font(Font, FontStyle.Italic | FontStyle.Underline);
+                            }
+                            else
+                            {
+                                //加粗倾斜且没有下划线,此时设置倾斜
+                                rtb.SelectionFont = new Font(Font, FontStyle.Italic);
+                            }
+                        }
+                        else
+                        if (isUnderline)
+                        {
+                            //加粗且有下划线,此时设置下划线
+                            rtb.SelectionFont = new Font(Font, FontStyle.Underline);
+                        }
+                    }
+                    else
+                    {
+                        //不是加粗的情况下,加粗
+                        isBold = true;
+                        tsbtn_bold.BackColor = Color.Orange;
+                        if (isItalic)
+                        {
+                            //倾斜的时候
+                            if (isUnderline)
+                            {
+                                //加粗倾斜且有下划线,此时设置加粗+倾斜+下划线
+                                rtb.SelectionFont = new Font(Font, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
+                            }
+                            else
+                            {
+                                //加粗倾斜且没有下划线,此时设置加粗+倾斜
+                                rtb.SelectionFont = new Font(Font, FontStyle.Bold | FontStyle.Italic);
+                            }
+                        }
+                        else
+                        if (isUnderline)
+                        {
+                            //加粗且有下划线,此时设置加粗+下划线
+                            rtb.SelectionFont = new Font(Font, FontStyle.Bold | FontStyle.Underline);
+                        }
+                    }
+                    break;
+                case "Italic":
+                    if (isItalic)
+                    {
+                        //倾斜状态下,取消倾斜
+                        isItalic = false;
+                        tsbtn_Italic.BackColor = Color.Transparent;
+                        if (isBold)
+                        {
+                            //加粗的时候
+                            if (isUnderline)
+                            {
+                                //加粗倾斜且有下划线,此时设置加粗+下划线
+                                rtb.SelectionFont = new Font(Font, FontStyle.Bold | FontStyle.Underline);
+                            }
+                            else
+                            {
+                                //加粗倾斜且没有下划线,此时设置加粗
+                                rtb.SelectionFont = new Font(Font, FontStyle.Bold);
+                            }
+                        }
+                        else
+                        if (isUnderline)
+                        {
+                            //倾斜且有下划线,此时设置下划线
+                            rtb.SelectionFont = new Font(Font, FontStyle.Underline);
+                        }
+                    }
+                    else
+                    {
+                        //不是倾斜的情况下,倾斜
+                        isItalic = true;
+                        tsbtn_Italic.BackColor = Color.Orange;
+                        if (isBold)
+                        {
+                            //加粗的时候
+                            if (isUnderline)
+                            {
+                                //加粗+下划线,此时设置加粗+倾斜+下划线
+                                rtb.SelectionFont = new Font(Font, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
+                            }
+                            else
+                            {
+                                //加粗倾斜且没有下划线,此时设置加粗+倾斜
+                                rtb.SelectionFont = new Font(Font, FontStyle.Bold | FontStyle.Italic);
+                            }
+                        }
+                        else
+                        if (isUnderline)
+                        {
+                            //下划线,此时设置倾斜+下划线
+                            rtb.SelectionFont = new Font(Font, FontStyle.Italic | FontStyle.Underline);
+                        }
+                    }
+                    break;
+                case "Underline":
+                    if (isUnderline)
+                    {
+                        //下划线状态下,取消下划线
+                        isUnderline = false;
+                        tsbtn_Underline.BackColor = Color.Transparent;
+                        if (isItalic)
+                        {
+                            //倾斜的时候
+                            if (isBold)
+                            {
+                                //加粗+倾斜+下划线,此时设置加粗+倾斜
+                                rtb.SelectionFont = new Font(Font, FontStyle.Bold | FontStyle.Italic);
+                            }
+                            else
+                            {
+                                //倾斜+下划线,此时设置下划线
+                                rtb.SelectionFont = new Font(Font, FontStyle.Italic);
+                            }
+                        }
+                        //下面考虑是否加粗
+                        if (isBold)
+                        {
+                            //加粗且有下划线,此时设置加粗
+                            rtb.SelectionFont = new Font(Font, FontStyle.Bold);
+                        }
+                    }
+                    else
+                    {
+                        //不是下划线的情况下,设置下划线
+                        isUnderline = true;
+                        tsbtn_Underline.BackColor = Color.Orange;
+                        if (isItalic)
+                        {
+                            //加粗的时候
+                            if (isBold)
+                            {
+                                //加粗+倾斜,此时设置加粗+倾斜+下划线
+                                rtb.SelectionFont = new Font(Font, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
+                            }
+                            else
+                            {
+                                //倾斜,此时设置倾斜+下划线
+                                rtb.SelectionFont = new Font(Font, FontStyle.Underline | FontStyle.Italic);
+                            }
+                        }
+                        else
+                        if (isBold)
+                        {
+                            //加粗,此时设置加粗+下划线
+                            rtb.SelectionFont = new Font(Font, FontStyle.Bold | FontStyle.Underline);
+                        }
+                    }
+
+                    break;
+            }
+
+
+        }
+
+        private void changetextfont1(string v)
+        {
+            Font oldFont, newFont;
+            oldFont = rtb.SelectionFont;
+            if (oldFont.Bold)
+            {
+                newFont = new Font(oldFont, oldFont.Style ^ FontStyle.Bold);
+            }
+            else
+            {
+                newFont = new Font(oldFont, oldFont.Style | FontStyle.Bold);
+            }
+            rtb.SelectionFont = newFont;
+            rtb.Focus();
+        }
+      
         #endregion
 
         //private void cboFont_MeasureItem(object sender, MeasureItemEventArgs e)
@@ -858,29 +1066,6 @@ namespace demo
         //    System.Drawing.Font objFonts = new Font(cboFont.Items[e.Index].ToString(), 14);
         //    e.DrawBackground();
         //    e.Graphics.DrawString(cboFont.Items[e.Index].ToString(), objFonts, new SolidBrush(e.ForeColor), new Point(e.Bounds.Left, e.Bounds.Top));
-        //}
-
-        //private void btn_bold_Click(object sender, EventArgs e)
-        //{
-        //    MessageBox.Show("fafaa");
-        //    if (isbold)
-        //    {
-        //        rtb.SelectionFont = new Font(Font, FontStyle.Regular);
-        //        isbold = true;
-        //        btn_bold.BackColor = Color.Transparent;
-        //    }
-        //    else
-        //    {
-        //    rtb.SelectionFont = new Font(Font, FontStyle.Bold);
-        //        isbold = false;
-        //        btn_bold.BackColor = Color.Blue;
-        //    }
-
-        //}
-
-        //private void button2_Click(object sender, EventArgs e)
-        //{
-        //    rtb.SelectionFont = new Font(Font, FontStyle.Regular);
         //}
     }
 }

@@ -83,16 +83,24 @@
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.eventLog1 = new System.Diagnostics.EventLog();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.rtb = new System.Windows.Forms.RichTextBox();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tsbtn_bold = new System.Windows.Forms.ToolStripButton();
+            this.tsbtn_Italic = new System.Windows.Forms.ToolStripButton();
+            this.tsbtn_Underline = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
+            this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
+            this.toolStripSplitButton3 = new System.Windows.Forms.ToolStripSplitButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.rtb = new System.Windows.Forms.RichTextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).BeginInit();
-            this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -457,12 +465,108 @@
             // 
             this.eventLog1.SynchronizingObject = this;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.rtb);
+            this.panel1.Controls.Add(this.toolStrip1);
+            this.panel1.Controls.Add(this.statusStrip1);
+            this.panel1.Controls.Add(this.menuStrip1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(627, 361);
+            this.panel1.TabIndex = 2;
+            // 
+            // rtb
+            // 
+            this.rtb.ContextMenuStrip = this.contextMenuStrip1;
+            this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb.Location = new System.Drawing.Point(0, 50);
+            this.rtb.Name = "rtb";
+            this.rtb.Size = new System.Drawing.Size(627, 289);
+            this.rtb.TabIndex = 0;
+            this.rtb.Text = "";
+            this.rtb.SelectionChanged += new System.EventHandler(this.rtb_SelectionChanged);
+            this.rtb.TextChanged += new System.EventHandler(this.rtb_TextChanged);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbtn_bold,
+            this.tsbtn_Italic,
+            this.tsbtn_Underline,
+            this.toolStripSplitButton1,
+            this.toolStripSplitButton2,
+            this.toolStripSplitButton3});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 25);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(627, 25);
+            this.toolStrip1.TabIndex = 2;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // tsbtn_bold
+            // 
+            this.tsbtn_bold.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtn_bold.Image = ((System.Drawing.Image)(resources.GetObject("tsbtn_bold.Image")));
+            this.tsbtn_bold.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtn_bold.Name = "tsbtn_bold";
+            this.tsbtn_bold.Size = new System.Drawing.Size(23, 22);
+            this.tsbtn_bold.Text = "加粗";
+            this.tsbtn_bold.Click += new System.EventHandler(this.tsbtn_bold_Click);
+            // 
+            // tsbtn_Italic
+            // 
+            this.tsbtn_Italic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtn_Italic.Image = ((System.Drawing.Image)(resources.GetObject("tsbtn_Italic.Image")));
+            this.tsbtn_Italic.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtn_Italic.Name = "tsbtn_Italic";
+            this.tsbtn_Italic.Size = new System.Drawing.Size(23, 22);
+            this.tsbtn_Italic.Text = "倾斜";
+            this.tsbtn_Italic.Click += new System.EventHandler(this.tsbtn_Italic_Click);
+            // 
+            // tsbtn_Underline
+            // 
+            this.tsbtn_Underline.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtn_Underline.Image = ((System.Drawing.Image)(resources.GetObject("tsbtn_Underline.Image")));
+            this.tsbtn_Underline.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtn_Underline.Name = "tsbtn_Underline";
+            this.tsbtn_Underline.Size = new System.Drawing.Size(23, 22);
+            this.tsbtn_Underline.Text = "toolStripButton3";
+            this.tsbtn_Underline.Click += new System.EventHandler(this.tsbtn_Underline_Click);
+            // 
+            // toolStripSplitButton1
+            // 
+            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
+            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(32, 22);
+            this.toolStripSplitButton1.Text = "toolStripSplitButton1";
+            // 
+            // toolStripSplitButton2
+            // 
+            this.toolStripSplitButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripSplitButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton2.Image")));
+            this.toolStripSplitButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton2.Name = "toolStripSplitButton2";
+            this.toolStripSplitButton2.Size = new System.Drawing.Size(32, 22);
+            this.toolStripSplitButton2.Text = "toolStripSplitButton2";
+            // 
+            // toolStripSplitButton3
+            // 
+            this.toolStripSplitButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripSplitButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton3.Image")));
+            this.toolStripSplitButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton3.Name = "toolStripSplitButton3";
+            this.toolStripSplitButton3.Size = new System.Drawing.Size(32, 22);
+            this.toolStripSplitButton3.Text = "toolStripSplitButton3";
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 314);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 339);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(627, 22);
             this.statusStrip1.TabIndex = 1;
@@ -479,35 +583,12 @@
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(0, 17);
             // 
-            // rtb
-            // 
-            this.rtb.ContextMenuStrip = this.contextMenuStrip1;
-            this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb.Location = new System.Drawing.Point(0, 0);
-            this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(627, 336);
-            this.rtb.TabIndex = 0;
-            this.rtb.Text = "";
-            this.rtb.SelectionChanged += new System.EventHandler(this.rtb_SelectionChanged);
-            this.rtb.TextChanged += new System.EventHandler(this.rtb_TextChanged);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.statusStrip1);
-            this.panel1.Controls.Add(this.rtb);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 25);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(627, 336);
-            this.panel1.TabIndex = 2;
-            // 
             // NotepadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(627, 361);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
@@ -520,12 +601,13 @@
             this.menuStrip1.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).EndInit();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -584,9 +666,16 @@
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Diagnostics.EventLog eventLog1;
         private System.Windows.Forms.Panel panel1;
+        public System.Windows.Forms.RichTextBox rtb;
+        private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        public System.Windows.Forms.RichTextBox rtb;
+        private System.Windows.Forms.ToolStripButton tsbtn_bold;
+        private System.Windows.Forms.ToolStripButton tsbtn_Italic;
+        private System.Windows.Forms.ToolStripButton tsbtn_Underline;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton2;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton3;
     }
 }
