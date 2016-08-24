@@ -459,6 +459,69 @@ namespace demo
         #endregion
 
         #endregion
+     
+        #region set text style设置字体
+        private void 宋体ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            changertbtextstyle("宋体",this.rtb);
+        }
+
+       
+        private void 黑体ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            changertbtextstyle("黑体", this.rtb);
+        }
+
+        private void 楷书ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            changertbtextstyle("楷体", this.rtb);
+        }
+
+        private void 幼圆ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            changertbtextstyle("幼圆", this.rtb);
+        }
+
+        private void arialToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            changertbtextstyle("Arial", this.rtb);
+        }
+
+        private void timesNewRomanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            changertbtextstyle("Times New Roman", this.rtb);
+        }
+
+        private void verdanaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            changertbtextstyle("Verdana", this.rtb);
+        } 
+        #endregion
+      
+        #region set Text sizel;设置字体大小
+        private void 小ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            changertbtextsize(9, this.rtb);
+        }
+        private void 中ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            changertbtextsize(12, this.rtb);
+        }
+        private void 大ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            changertbtextsize(15, this.rtb);
+        }
+
+        private void 较大ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            changertbtextsize(18, this.rtb);
+        }
+
+        private void 最大ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            changertbtextsize(21, this.rtb);
+        }
+        #endregion
 
         #region NotepadForm_KeyDown(object sender, KeyEventArgs e) :: NotepadForm_KeyDown;键盘组合键事件
         /// <summary>
@@ -895,6 +958,10 @@ namespace demo
                             //加粗且有下划线,此时设置下划线
                             rtb.SelectionFont = new Font(Font, FontStyle.Underline);
                         }
+                        else
+                        {
+                            rtb.SelectionFont = new Font(Font, FontStyle.Regular);
+                        }
                     }
                     else
                     {
@@ -920,6 +987,10 @@ namespace demo
                         {
                             //加粗且有下划线,此时设置加粗+下划线
                             rtb.SelectionFont = new Font(Font, FontStyle.Bold | FontStyle.Underline);
+                        }
+                        else
+                        {
+                            rtb.SelectionFont = new Font(Font, FontStyle.Bold);
                         }
                     }
                     break;
@@ -949,6 +1020,10 @@ namespace demo
                             //倾斜且有下划线,此时设置下划线
                             rtb.SelectionFont = new Font(Font, FontStyle.Underline);
                         }
+                        else
+                        {
+                            rtb.SelectionFont = new Font(Font, FontStyle.Regular);
+                        }
                     }
                     else
                     {
@@ -974,6 +1049,10 @@ namespace demo
                         {
                             //下划线,此时设置倾斜+下划线
                             rtb.SelectionFont = new Font(Font, FontStyle.Italic | FontStyle.Underline);
+                        }
+                        else
+                        {
+                            rtb.SelectionFont = new Font(Font, FontStyle.Italic);
                         }
                     }
                     break;
@@ -1003,6 +1082,10 @@ namespace demo
                             //加粗且有下划线,此时设置加粗
                             rtb.SelectionFont = new Font(Font, FontStyle.Bold);
                         }
+                        else
+                        {
+                            rtb.SelectionFont = new Font(Font, FontStyle.Regular);
+                        }
                     }
                     else
                     {
@@ -1029,6 +1112,10 @@ namespace demo
                             //加粗,此时设置加粗+下划线
                             rtb.SelectionFont = new Font(Font, FontStyle.Bold | FontStyle.Underline);
                         }
+                        else
+                        {
+                            rtb.SelectionFont = new Font(Font, FontStyle.Underline);
+                        }
                     }
 
                     break;
@@ -1052,8 +1139,95 @@ namespace demo
             rtb.SelectionFont = newFont;
             rtb.Focus();
         }
-      
+
+        private void changertbtextstyle(string fontName, RichTextBox curRichTextBox)
+        {
+            if (fontName == string.Empty)
+                throw new System.Exception("字体名称参数错误，不能为空");
+
+            RichTextBox tempRichTextBox = new RichTextBox();  //用于保存被选中文本的副本  
+
+            //curRichTextBox是当前文本，即原型  
+            int curRtbStart = curRichTextBox.SelectionStart;
+            int len = curRichTextBox.SelectionLength;
+            int tempRtbStart = 0;
+
+            Font font = curRichTextBox.SelectionFont;
+            if (len <= 1 && null != font)
+            {
+                curRichTextBox.SelectionFont = new Font(fontName, font.Size, font.Style);
+                return;
+            }
+
+            tempRichTextBox.Rtf = curRichTextBox.SelectedRtf;
+            for (int i = 0; i < len; i++)  //逐个设置字体种类  
+            {
+                tempRichTextBox.Select(tempRtbStart + i, 1);
+                tempRichTextBox.SelectionFont =
+                    new Font(fontName, tempRichTextBox.SelectionFont.Size,
+                             tempRichTextBox.SelectionFont.Style);
+            }
+
+            //将副本内容插入到到原型中  
+            tempRichTextBox.Select(tempRtbStart, len);
+            curRichTextBox.SelectedRtf = tempRichTextBox.SelectedRtf;
+            curRichTextBox.Select(curRtbStart, len);
+            curRichTextBox.Focus();
+        }
+
         #endregion
+
+        #region changertbtextsize(float fontSize, RichTextBox rtb) :: set text size function;设置字体大小方法
+        /// <summary>
+        /// set text size function;设置字体大小方法
+        /// </summary>
+        /// <param name="fontSize">字号</param>
+        /// <param name="rtb">要修改的richtextbox</param>
+        private void changertbtextsize(float fontSize, RichTextBox rtb)
+        {
+            RichTextBox tempRichTextBox = new RichTextBox();
+            int curRtbStart = rtb.SelectionStart;
+            int len = rtb.SelectionLength;
+            int tempRtbStart = 0;
+
+            Font font = rtb.SelectionFont;
+            if (len <= 1 && null != font)
+            {
+                rtb.SelectionFont = new Font(font.Name, fontSize, font.Style);
+                return;
+            }
+
+            tempRichTextBox.Rtf = rtb.SelectedRtf;
+            for (int i = 0; i < len; i++)
+            {
+                tempRichTextBox.Select(tempRtbStart + i, 1);
+                tempRichTextBox.SelectionFont =
+                    new Font(tempRichTextBox.SelectionFont.Name,
+                             fontSize, tempRichTextBox.SelectionFont.Style);
+            }
+
+            tempRichTextBox.Select(tempRtbStart, len);
+            rtb.SelectedRtf = tempRichTextBox.SelectedRtf;
+            rtb.Select(curRtbStart, len);
+            rtb.Focus();
+        }
+
+        private void toolStripDropDownButton1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
+
+        private void fontsetting1_Load(object sender, EventArgs e)
+        {
+            this.fontsetting1.Rtb = this.rtb;
+        }
+
+        #endregion
+
+
+
 
         //private void cboFont_MeasureItem(object sender, MeasureItemEventArgs e)
         //{
