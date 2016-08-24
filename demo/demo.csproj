@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClassLibrary1">
+      <HintPath>..\..\..\..\Documents\Visual Studio 2015\Projects\ClassLibrary1\ClassLibrary1\bin\Debug\ClassLibrary1.dll</HintPath>
+    </Reference>
     <Reference Include="FontCombo">
       <HintPath>..\..\..\..\Desktop\com\bin\Debug\FontCombo.dll</HintPath>
     </Reference>
@@ -72,6 +75,12 @@
     </Compile>
     <Compile Include="Fontsetting.Designer.cs">
       <DependentUpon>Fontsetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fontsize.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="fontsize.Designer.cs">
+      <DependentUpon>fontsize.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -134,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Fontsetting.resx">
       <DependentUpon>Fontsetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fontsize.resx">
+      <DependentUpon>fontsize.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

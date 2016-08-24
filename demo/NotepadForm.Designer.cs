@@ -85,36 +85,15 @@
             this.eventLog1 = new System.Diagnostics.EventLog();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rtb = new System.Windows.Forms.RichTextBox();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.tsbtn_bold = new System.Windows.Forms.ToolStripButton();
-            this.tsbtn_Italic = new System.Windows.Forms.ToolStripButton();
-            this.tsbtn_Underline = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
-            this.宋体ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.黑体ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.楷书ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.幼圆ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.arialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.timesNewRomanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.verdanaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
-            this.小ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.中ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.大ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.较大ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.最大ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSplitButton3 = new System.Windows.Forms.ToolStripSplitButton();
-            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.fontsetting1 = new demo.Fontsetting();
+            this.fontsetting1 = new ClassLibrary1.Fontsetting();
+            this.fontsizewidget = new ClassLibrary1.Fontsize();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).BeginInit();
             this.panel1.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -482,9 +461,9 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.fontsetting1);
             this.panel1.Controls.Add(this.rtb);
-            this.panel1.Controls.Add(this.toolStrip1);
+            this.panel1.Controls.Add(this.fontsizewidget);
+            this.panel1.Controls.Add(this.fontsetting1);
             this.panel1.Controls.Add(this.statusStrip1);
             this.panel1.Controls.Add(this.menuStrip1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -497,211 +476,13 @@
             // 
             this.rtb.ContextMenuStrip = this.contextMenuStrip1;
             this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb.Location = new System.Drawing.Point(0, 50);
+            this.rtb.Location = new System.Drawing.Point(0, 75);
             this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(627, 289);
+            this.rtb.Size = new System.Drawing.Size(627, 264);
             this.rtb.TabIndex = 0;
             this.rtb.Text = "";
             this.rtb.SelectionChanged += new System.EventHandler(this.rtb_SelectionChanged);
             this.rtb.TextChanged += new System.EventHandler(this.rtb_TextChanged);
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbtn_bold,
-            this.tsbtn_Italic,
-            this.tsbtn_Underline,
-            this.toolStripSeparator10,
-            this.toolStripSplitButton2,
-            this.toolStripSplitButton1,
-            this.toolStripSplitButton3});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 25);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(627, 25);
-            this.toolStrip1.TabIndex = 2;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // tsbtn_bold
-            // 
-            this.tsbtn_bold.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbtn_bold.Image = ((System.Drawing.Image)(resources.GetObject("tsbtn_bold.Image")));
-            this.tsbtn_bold.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbtn_bold.Name = "tsbtn_bold";
-            this.tsbtn_bold.Size = new System.Drawing.Size(23, 22);
-            this.tsbtn_bold.Text = "加粗";
-            this.tsbtn_bold.Click += new System.EventHandler(this.tsbtn_bold_Click);
-            // 
-            // tsbtn_Italic
-            // 
-            this.tsbtn_Italic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbtn_Italic.Image = ((System.Drawing.Image)(resources.GetObject("tsbtn_Italic.Image")));
-            this.tsbtn_Italic.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbtn_Italic.Name = "tsbtn_Italic";
-            this.tsbtn_Italic.Size = new System.Drawing.Size(23, 22);
-            this.tsbtn_Italic.Text = "倾斜";
-            this.tsbtn_Italic.Click += new System.EventHandler(this.tsbtn_Italic_Click);
-            // 
-            // tsbtn_Underline
-            // 
-            this.tsbtn_Underline.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbtn_Underline.Image = ((System.Drawing.Image)(resources.GetObject("tsbtn_Underline.Image")));
-            this.tsbtn_Underline.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbtn_Underline.Name = "tsbtn_Underline";
-            this.tsbtn_Underline.Size = new System.Drawing.Size(23, 22);
-            this.tsbtn_Underline.Text = "toolStripButton3";
-            this.tsbtn_Underline.Click += new System.EventHandler(this.tsbtn_Underline_Click);
-            // 
-            // toolStripSeparator10
-            // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSplitButton2
-            // 
-            this.toolStripSplitButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripSplitButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.宋体ToolStripMenuItem,
-            this.黑体ToolStripMenuItem,
-            this.楷书ToolStripMenuItem,
-            this.幼圆ToolStripMenuItem,
-            this.arialToolStripMenuItem,
-            this.timesNewRomanToolStripMenuItem,
-            this.verdanaToolStripMenuItem});
-            this.toolStripSplitButton2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.toolStripSplitButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton2.Image")));
-            this.toolStripSplitButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton2.Name = "toolStripSplitButton2";
-            this.toolStripSplitButton2.Size = new System.Drawing.Size(32, 22);
-            this.toolStripSplitButton2.Text = "toolStripSplitButton2";
-            // 
-            // 宋体ToolStripMenuItem
-            // 
-            this.宋体ToolStripMenuItem.Font = new System.Drawing.Font("宋体", 12F);
-            this.宋体ToolStripMenuItem.Name = "宋体ToolStripMenuItem";
-            this.宋体ToolStripMenuItem.Size = new System.Drawing.Size(190, 24);
-            this.宋体ToolStripMenuItem.Text = "宋体";
-            this.宋体ToolStripMenuItem.Click += new System.EventHandler(this.宋体ToolStripMenuItem_Click);
-            // 
-            // 黑体ToolStripMenuItem
-            // 
-            this.黑体ToolStripMenuItem.Font = new System.Drawing.Font("黑体", 12F);
-            this.黑体ToolStripMenuItem.Name = "黑体ToolStripMenuItem";
-            this.黑体ToolStripMenuItem.Size = new System.Drawing.Size(190, 24);
-            this.黑体ToolStripMenuItem.Text = "黑体";
-            this.黑体ToolStripMenuItem.Click += new System.EventHandler(this.黑体ToolStripMenuItem_Click);
-            // 
-            // 楷书ToolStripMenuItem
-            // 
-            this.楷书ToolStripMenuItem.Font = new System.Drawing.Font("楷体", 12F);
-            this.楷书ToolStripMenuItem.Name = "楷书ToolStripMenuItem";
-            this.楷书ToolStripMenuItem.Size = new System.Drawing.Size(190, 24);
-            this.楷书ToolStripMenuItem.Text = "楷书";
-            this.楷书ToolStripMenuItem.Click += new System.EventHandler(this.楷书ToolStripMenuItem_Click);
-            // 
-            // 幼圆ToolStripMenuItem
-            // 
-            this.幼圆ToolStripMenuItem.Font = new System.Drawing.Font("幼圆", 12F);
-            this.幼圆ToolStripMenuItem.Name = "幼圆ToolStripMenuItem";
-            this.幼圆ToolStripMenuItem.Size = new System.Drawing.Size(190, 24);
-            this.幼圆ToolStripMenuItem.Text = "幼圆";
-            this.幼圆ToolStripMenuItem.Click += new System.EventHandler(this.幼圆ToolStripMenuItem_Click);
-            // 
-            // arialToolStripMenuItem
-            // 
-            this.arialToolStripMenuItem.Font = new System.Drawing.Font("Arial Narrow", 12F);
-            this.arialToolStripMenuItem.Name = "arialToolStripMenuItem";
-            this.arialToolStripMenuItem.Size = new System.Drawing.Size(190, 24);
-            this.arialToolStripMenuItem.Text = "Arial";
-            this.arialToolStripMenuItem.Click += new System.EventHandler(this.arialToolStripMenuItem_Click);
-            // 
-            // timesNewRomanToolStripMenuItem
-            // 
-            this.timesNewRomanToolStripMenuItem.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timesNewRomanToolStripMenuItem.Name = "timesNewRomanToolStripMenuItem";
-            this.timesNewRomanToolStripMenuItem.Size = new System.Drawing.Size(190, 24);
-            this.timesNewRomanToolStripMenuItem.Text = "Times New Roman";
-            this.timesNewRomanToolStripMenuItem.Click += new System.EventHandler(this.timesNewRomanToolStripMenuItem_Click);
-            // 
-            // verdanaToolStripMenuItem
-            // 
-            this.verdanaToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.verdanaToolStripMenuItem.Name = "verdanaToolStripMenuItem";
-            this.verdanaToolStripMenuItem.Size = new System.Drawing.Size(190, 24);
-            this.verdanaToolStripMenuItem.Text = "Verdana";
-            this.verdanaToolStripMenuItem.Click += new System.EventHandler(this.verdanaToolStripMenuItem_Click);
-            // 
-            // toolStripSplitButton1
-            // 
-            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.小ToolStripMenuItem,
-            this.中ToolStripMenuItem,
-            this.大ToolStripMenuItem,
-            this.较大ToolStripMenuItem,
-            this.最大ToolStripMenuItem});
-            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
-            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
-            this.toolStripSplitButton1.Size = new System.Drawing.Size(32, 22);
-            this.toolStripSplitButton1.Text = "toolStripSplitButton1";
-            // 
-            // 小ToolStripMenuItem
-            // 
-            this.小ToolStripMenuItem.Checked = true;
-            this.小ToolStripMenuItem.CheckOnClick = true;
-            this.小ToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.小ToolStripMenuItem.Name = "小ToolStripMenuItem";
-            this.小ToolStripMenuItem.Size = new System.Drawing.Size(139, 40);
-            this.小ToolStripMenuItem.Text = "小";
-            this.小ToolStripMenuItem.Click += new System.EventHandler(this.小ToolStripMenuItem_Click);
-            // 
-            // 中ToolStripMenuItem
-            // 
-            this.中ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F);
-            this.中ToolStripMenuItem.Name = "中ToolStripMenuItem";
-            this.中ToolStripMenuItem.Size = new System.Drawing.Size(139, 40);
-            this.中ToolStripMenuItem.Text = "中";
-            this.中ToolStripMenuItem.Click += new System.EventHandler(this.中ToolStripMenuItem_Click);
-            // 
-            // 大ToolStripMenuItem
-            // 
-            this.大ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 15F);
-            this.大ToolStripMenuItem.Name = "大ToolStripMenuItem";
-            this.大ToolStripMenuItem.Size = new System.Drawing.Size(139, 40);
-            this.大ToolStripMenuItem.Text = "大";
-            this.大ToolStripMenuItem.Click += new System.EventHandler(this.大ToolStripMenuItem_Click);
-            // 
-            // 较大ToolStripMenuItem
-            // 
-            this.较大ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F);
-            this.较大ToolStripMenuItem.Name = "较大ToolStripMenuItem";
-            this.较大ToolStripMenuItem.Size = new System.Drawing.Size(139, 40);
-            this.较大ToolStripMenuItem.Text = "较大";
-            this.较大ToolStripMenuItem.Click += new System.EventHandler(this.较大ToolStripMenuItem_Click);
-            // 
-            // 最大ToolStripMenuItem
-            // 
-            this.最大ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 21F);
-            this.最大ToolStripMenuItem.Name = "最大ToolStripMenuItem";
-            this.最大ToolStripMenuItem.Size = new System.Drawing.Size(139, 40);
-            this.最大ToolStripMenuItem.Text = "最大";
-            this.最大ToolStripMenuItem.Click += new System.EventHandler(this.最大ToolStripMenuItem_Click);
-            // 
-            // toolStripSplitButton3
-            // 
-            this.toolStripSplitButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripSplitButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripComboBox1});
-            this.toolStripSplitButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton3.Image")));
-            this.toolStripSplitButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton3.Name = "toolStripSplitButton3";
-            this.toolStripSplitButton3.Size = new System.Drawing.Size(32, 22);
-            this.toolStripSplitButton3.Text = "toolStripSplitButton3";
-            // 
-            // toolStripComboBox1
-            // 
-            this.toolStripComboBox1.Name = "toolStripComboBox1";
-            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 25);
             // 
             // statusStrip1
             // 
@@ -727,12 +508,21 @@
             // 
             // fontsetting1
             // 
-            this.fontsetting1.Location = new System.Drawing.Point(202, 25);
+            this.fontsetting1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.fontsetting1.Location = new System.Drawing.Point(0, 25);
             this.fontsetting1.Name = "fontsetting1";
             this.fontsetting1.Rtb = null;
-            this.fontsetting1.Size = new System.Drawing.Size(87, 25);
-            this.fontsetting1.TabIndex = 3;
-            this.fontsetting1.Load += new System.EventHandler(this.fontsetting1_Load);
+            this.fontsetting1.Size = new System.Drawing.Size(627, 25);
+            this.fontsetting1.TabIndex = 5;
+            // 
+            // fontsizewidget
+            // 
+            this.fontsizewidget.Dock = System.Windows.Forms.DockStyle.Top;
+            this.fontsizewidget.Location = new System.Drawing.Point(0, 50);
+            this.fontsizewidget.Name = "fontsizewidget";
+            this.fontsizewidget.Rtb = null;
+            this.fontsizewidget.Size = new System.Drawing.Size(627, 25);
+            this.fontsizewidget.TabIndex = 6;
             // 
             // NotepadForm
             // 
@@ -754,8 +544,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -818,30 +606,10 @@
         private System.Diagnostics.EventLog eventLog1;
         private System.Windows.Forms.Panel panel1;
         public System.Windows.Forms.RichTextBox rtb;
-        private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        private System.Windows.Forms.ToolStripButton tsbtn_bold;
-        private System.Windows.Forms.ToolStripButton tsbtn_Italic;
-        private System.Windows.Forms.ToolStripButton tsbtn_Underline;
-        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
-        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton2;
-        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton3;
-        private System.Windows.Forms.ToolStripMenuItem 小ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 中ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 大ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 较大ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 最大ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 宋体ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 黑体ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 楷书ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 幼圆ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem arialToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem timesNewRomanToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem verdanaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
-        private Fontsetting fontsetting1;
+        private ClassLibrary1.Fontsetting fontsetting1;
+        private ClassLibrary1.Fontsize fontsizewidget;
     }
 }

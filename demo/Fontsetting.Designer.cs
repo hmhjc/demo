@@ -48,7 +48,7 @@
             this.toolStripSeparator1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(87, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(88, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -58,7 +58,7 @@
             this.tsbtn_bold.Image = ((System.Drawing.Image)(resources.GetObject("tsbtn_bold.Image")));
             this.tsbtn_bold.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbtn_bold.Name = "tsbtn_bold";
-            this.tsbtn_bold.Size = new System.Drawing.Size(23, 24);
+            this.tsbtn_bold.Size = new System.Drawing.Size(23, 22);
             this.tsbtn_bold.Text = "toolStripButton1";
             this.tsbtn_bold.Click += new System.EventHandler(this.tsbtn_bold_Click);
             // 
@@ -78,7 +78,7 @@
             this.tsbtn_Underline.Image = ((System.Drawing.Image)(resources.GetObject("tsbtn_Underline.Image")));
             this.tsbtn_Underline.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbtn_Underline.Name = "tsbtn_Underline";
-            this.tsbtn_Underline.Size = new System.Drawing.Size(23, 20);
+            this.tsbtn_Underline.Size = new System.Drawing.Size(23, 24);
             this.tsbtn_Underline.Text = "toolStripButton3";
             this.tsbtn_Underline.Click += new System.EventHandler(this.tsbtn_Underline_Click);
             // 
@@ -93,7 +93,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.toolStrip1);
             this.Name = "Fontsetting";
-            this.Size = new System.Drawing.Size(87, 27);
+            this.Size = new System.Drawing.Size(88, 25);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
