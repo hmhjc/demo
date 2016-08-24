@@ -88,8 +88,9 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.fontsetting1 = new ClassLibrary1.Fontsetting();
             this.fontsizewidget = new ClassLibrary1.Fontsize();
+            this.fontsetting1 = new ClassLibrary1.Fontsetting();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).BeginInit();
@@ -461,9 +462,10 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.rtb);
-            this.panel1.Controls.Add(this.fontsizewidget);
             this.panel1.Controls.Add(this.fontsetting1);
+            this.panel1.Controls.Add(this.fontsizewidget);
             this.panel1.Controls.Add(this.statusStrip1);
             this.panel1.Controls.Add(this.menuStrip1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -506,23 +508,33 @@
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(0, 17);
             // 
-            // fontsetting1
-            // 
-            this.fontsetting1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.fontsetting1.Location = new System.Drawing.Point(0, 25);
-            this.fontsetting1.Name = "fontsetting1";
-            this.fontsetting1.Rtb = null;
-            this.fontsetting1.Size = new System.Drawing.Size(627, 25);
-            this.fontsetting1.TabIndex = 5;
-            // 
             // fontsizewidget
             // 
             this.fontsizewidget.Dock = System.Windows.Forms.DockStyle.Top;
-            this.fontsizewidget.Location = new System.Drawing.Point(0, 50);
+            this.fontsizewidget.Location = new System.Drawing.Point(0, 25);
             this.fontsizewidget.Name = "fontsizewidget";
             this.fontsizewidget.Rtb = null;
             this.fontsizewidget.Size = new System.Drawing.Size(627, 25);
             this.fontsizewidget.TabIndex = 6;
+            // 
+            // fontsetting1
+            // 
+            this.fontsetting1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.fontsetting1.Location = new System.Drawing.Point(0, 50);
+            this.fontsetting1.Name = "fontsetting1";
+            this.fontsetting1.Rtb = null;
+            this.fontsetting1.Size = new System.Drawing.Size(627, 25);
+            this.fontsetting1.TabIndex = 7;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(226, 26);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // NotepadForm
             // 
@@ -609,7 +621,8 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        private ClassLibrary1.Fontsetting fontsetting1;
         private ClassLibrary1.Fontsize fontsizewidget;
+        private ClassLibrary1.Fontsetting fontsetting1;
+        private System.Windows.Forms.Button button1;
     }
 }

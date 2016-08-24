@@ -868,8 +868,24 @@ namespace demo
             rtb.Focus();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Font oldFont, newFont;
+            oldFont = rtb.SelectionFont;
+            if (oldFont.Bold)
+            {
+                newFont = new Font(oldFont, oldFont.Style ^ FontStyle.Bold);
+            }
+            else
+            {
+                newFont = new Font(oldFont, oldFont.Style | FontStyle.Bold);
+            }
+            rtb.SelectionFont = newFont;
+            rtb.Focus();
+        }
+
         #endregion
-       
+
 
         //private void cboFont_MeasureItem(object sender, MeasureItemEventArgs e)
         //{
