@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,16 +10,16 @@ using System.Windows.Forms;
 
 namespace demo
 {
-    public partial class UserControl1 : UserControl
+    public partial class test : Form
     {
-        public UserControl1()
+        public test()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void test_Load(object sender, EventArgs e)
         {
-            MessageBox.Show("hhihiw");
+            this.fontsetting1.Rtb = this.richTextBox1;
         }
     }
 }

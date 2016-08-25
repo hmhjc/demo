@@ -13,6 +13,7 @@ namespace demo
         public NotepadForm()
         {
             InitializeComponent();
+          
         }
 
         #region ★ Var
@@ -594,14 +595,13 @@ namespace demo
         /// <param name="e"></param>
         private void NotepadForm_Load(object sender, EventArgs e)
         {
-            //foreach (System.Drawing.FontFamily i in objFont.Families)
-            //{
-            //    cboFont.Items.Add(i.Name.ToString());
-            //}
-            //cboFont.SelectedIndex = 0;
-            //初始化,撤销,剪切,复制,删除不可用
+            //给自定义控件传值
+            this.fontbackcolor1.Rtb = this.rtb;
+            this.alignment1.Rtb = this.rtb;
+            this.fontcolourwidget1.Rtb = this.rtb;
             this.fontsetting1.Rtb = this.rtb;
-            this.fontsizewidget.Rtb = this.rtb;
+            this.fontsize1.Rtb = this.rtb;
+            //初始化,撤销,剪切,复制,删除不可用
             tsmi_revocation.Enabled = false;
             tsmi_copy.Enabled = false;
             tsmi_cut.Enabled = false;
@@ -883,6 +883,13 @@ namespace demo
             rtb.SelectionFont = newFont;
             rtb.Focus();
         }
+
+        private void userControl11_SelectColorChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
 
         #endregion
 

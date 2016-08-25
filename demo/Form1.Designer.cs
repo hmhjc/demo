@@ -73,7 +73,7 @@
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(83, 22);
             this.toolStripMenuItem3.Text = "1";
             // 
             // toolStripMenuItem2
@@ -87,7 +87,7 @@
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(83, 22);
             this.toolStripMenuItem5.Text = "2";
             // 
             // toolStripMenuItem4
@@ -101,7 +101,7 @@
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(83, 22);
             this.toolStripMenuItem7.Text = "3";
             // 
             // toolStripMenuItem6
@@ -115,7 +115,7 @@
             // toolStripMenuItem9
             // 
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(83, 22);
             this.toolStripMenuItem9.Text = "4";
             // 
             // toolStrip1

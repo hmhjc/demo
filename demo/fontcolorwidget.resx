@@ -117,27 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="toolStripSplitButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACuSURBVDhPtZINDYMwEIUrYRImAQdDwiQgAQcgYRImASfD
-        AThAwvY+uktIYf3Zsi954XppX+/KuX/TSo0Pv2OWHj4sp5IweEpnEqVQ+k3CgG8xV4mbMZhIlMDhkw/d
-        KGFCLpvtZlrB4L6uMqBsHtCgEgyQVRWF2+tAg4QBc5HkqFdMMEjOBKV/+uc2E9v2dsReupcwiM5EzMBm
-        YllXAfTYSZe3QiibPAOFie39Fede3k4h6Rj554YAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="toolStripSplitButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADPSURBVDhPndMBDcIwEIXhSUACEpCABCQgAQcgAQlIwAE4
-        AAcgAQdw37aGhq1k3Uv+dNe1d33XrfnROtj3zNI9ePesTNRoGdj47MdjUKVdYCMbxkdQpXPAAiUrk20s
-        gvzYhyCP2dPYYsJtkFc0im9t1CV8Bac2GpHj23DJEEN1jdUbSUZloUXXjHQbqitAerPpHr8yYeHvi9yG
-        BJJKMLBhonQ088kGGQdr3b8mjsk8C3n39cKtzZJi6V+BuErpusFK8bv4p/SRlWxPkj6EmuYD1R4+r1zh
-        1CkAAAAASUVORK5CYII=
-</value>
-  </data>
 </root>

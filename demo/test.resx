@@ -117,36 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="tsbtn_bold.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC2SURBVDhPnZLRDcIwDEQzQkdgBDYoGzECbNAVGIER2KAj
-        tBvABvQe0kklcdLCSe8jsX2x7KSV3g1GMYhOVBUV5jzFUYRy0ulz+tZB3AXxiYtILQPLOWEXewxm8bcB
-        RcQxCWWDs+hXcGYDDPAlqh3aoMVFVOWkm7hmsAFeJ86fCP+DDWotUuRV8kihLQNEjBzmUegXAyi0x4B5
-        kBOusmXAV2YDzsGokINbhANEUTKwvoegMOsupQVBB2bmS3j62gAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="tsbtn_Italic.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABcSURBVDhPY8AD/uPAB4CYKOAAxROAGKQRxjcAYpIAyACi
-        bcUGQJpBhpANQM5PgDBJByD/ggwg2d8wALIZZADZYDQAh2QAgvxrD8Ug5/cj8YkCIFtBGrFhLICBAQAC
-        FSMI8hkdlQAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="tsbtn_Underline.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABmSURBVDhPY6A2cADi/1AaG8AnBwajBtDYAAMgpsgAfHIo
-        AKRoAoSJAhqAGCQnAObhASDNIIX1QGwPxSD2eyBeAMREAZBtH4AYZBAIg9gggwnaThUAsh3kZFyYqEDE
-        h0EWUAswMAAAFkIvyHwBiRwAAAAASUVORK5CYII=
-</value>
-  </data>
-  <metadata name="helpProvider1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>127, 17</value>
-  </metadata>
 </root>
