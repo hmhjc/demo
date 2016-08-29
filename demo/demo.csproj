@@ -35,7 +35,7 @@
   <ItemGroup>
     <Reference Include="ClassLibrary1, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\ClassLibrary1.dll</HintPath>
+      <HintPath>..\..\..\..\Documents\Visual Studio 2015\Projects\ClassLibrary1\111\ClassLibrary1.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

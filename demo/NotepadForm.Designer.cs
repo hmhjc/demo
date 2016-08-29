@@ -505,7 +505,7 @@
             // fontbackcolor1
             // 
             this.fontbackcolor1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.fontbackcolor1.Location = new System.Drawing.Point(311, 0);
+            this.fontbackcolor1.Location = new System.Drawing.Point(348, 0);
             this.fontbackcolor1.Name = "fontbackcolor1";
             this.fontbackcolor1.Rtb = null;
             this.fontbackcolor1.SelectedColor = System.Drawing.Color.Empty;
@@ -515,7 +515,7 @@
             // fontcolourwidget1
             // 
             this.fontcolourwidget1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.fontcolourwidget1.Location = new System.Drawing.Point(217, 0);
+            this.fontcolourwidget1.Location = new System.Drawing.Point(254, 0);
             this.fontcolourwidget1.Name = "fontcolourwidget1";
             this.fontcolourwidget1.Rtb = null;
             this.fontcolourwidget1.SelectedColor = System.Drawing.Color.Empty;
@@ -525,7 +525,7 @@
             // alignment1
             // 
             this.alignment1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.alignment1.Location = new System.Drawing.Point(147, 0);
+            this.alignment1.Location = new System.Drawing.Point(184, 0);
             this.alignment1.Name = "alignment1";
             this.alignment1.Rtb = null;
             this.alignment1.Size = new System.Drawing.Size(70, 26);
@@ -537,7 +537,7 @@
             this.fontsize1.Location = new System.Drawing.Point(71, 0);
             this.fontsize1.Name = "fontsize1";
             this.fontsize1.Rtb = null;
-            this.fontsize1.Size = new System.Drawing.Size(76, 26);
+            this.fontsize1.Size = new System.Drawing.Size(113, 26);
             this.fontsize1.TabIndex = 1;
             // 
             // fontsetting1
